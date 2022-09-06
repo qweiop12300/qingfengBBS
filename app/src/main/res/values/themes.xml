@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.清风论坛" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">#FFFFFF</item>
         <item name="colorPrimaryVariant">#0018B300</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -12,7 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
 
-        
+
         <!-- Customize your theme here. -->
     </style>
     

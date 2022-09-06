@@ -4,28 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="25dp"
     tools:context=".MainActivity"
     >
-
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        >
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="jjjjjjjjjj"
-            android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            app:title="hhhhhhhhhhhhhhhh"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            android:background="@color/white">
+            <include
+                android:id="@+id/home_action_bar"
+                layout="@layout/home_action_bar">
+            </include>
         </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/main_tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            app:tabIndicatorColor="#FF9800"
+            app:tabPaddingStart="0dp"
+            app:tabPaddingEnd="0dp"
+            app:tabGravity="fill"
+            app:tabMaxWidth="0dp"
+            app:tabIndicatorFullWidth="false"
+            app:tabTextColor="@color/grayAndBlack"
+            app:tabSelectedTextColor="@color/skyBlue"
+            app:tabIndicatorGravity="bottom"
+            app:tabIndicatorHeight="5dp"
+            app:tabIndicatorColor="@color/skyBlue"
             app:tabMode="scrollable">
         </com.google.android.material.tabs.TabLayout>
 
@@ -35,8 +50,7 @@
         android:id="@+id/main_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        >
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
     </androidx.viewpager2.widget.ViewPager2>
 
 

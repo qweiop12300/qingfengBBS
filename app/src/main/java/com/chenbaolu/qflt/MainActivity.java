@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.chenbaolu.qflt.Adapter.RecyclerViewAdapter;
 import com.chenbaolu.qflt.Adapter.ViewPagerAdapter;
@@ -39,7 +40,6 @@ public class MainActivity extends BaseActivity {
                 tab.setText(list.get(position));
             }
         }).attach();
-
     }
 
 }
