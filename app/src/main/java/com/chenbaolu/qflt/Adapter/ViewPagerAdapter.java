@@ -28,7 +28,7 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_viewpager_main,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_viewpager_home,parent,false);
         return new ViewHolder(view);
     }
 

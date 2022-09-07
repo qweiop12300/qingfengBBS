@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<com.google.android.material.appbar.AppBarLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_scrollFlags="scroll|enterAlways">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/home_bar_circle"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:src="@mipmap/ic_launcher"
+            android:layout_margin="10dp">
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <TextView
+            android:id="@+id/home_bar_search"
+            android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_toRightOf="@+id/home_bar_circle"
+            android:layout_toLeftOf="@+id/home_bar_news"
+            android:background="@drawable/search_radius"></TextView>
+
+        <ImageView
+            android:id="@+id/home_bar_news"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/home_bar_add"
+            android:src="@drawable/ic_action_message">
+
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/home_bar_add"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/ic_action_add"></ImageView>
+
+        <View
+            android:id="@+id/home_bar_newmessage"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="@drawable/round_radius"
+            android:layout_alignRight="@id/home_bar_news"
+            android:layout_alignTop="@id/home_bar_news"
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="11dp"
+            android:visibility="visible"
+            >
+        </View>
+    </RelativeLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/home_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabPaddingStart="0dp"
+        app:tabPaddingEnd="0dp"
+        app:tabGravity="fill"
+        app:tabMaxWidth="0dp"
+        app:tabIndicatorFullWidth="false"
+        app:tabTextColor="@color/grayAndBlack"
+        app:tabSelectedTextColor="@color/skyBlue"
+        app:tabIndicatorGravity="bottom"
+        app:tabIndicatorHeight="5dp"
+        app:tabIndicatorColor="@color/skyBlue"
+        app:tabMode="scrollable"
+        >
+    </com.google.android.material.tabs.TabLayout>
+
+</com.google.android.material.appbar.AppBarLayout>
+
+
+
+<androidx.viewpager2.widget.ViewPager2
+    android:id="@+id/home_viewpager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+</androidx.viewpager2.widget.ViewPager2>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

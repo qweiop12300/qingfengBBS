@@ -3,13 +3,32 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/drawable-anydpi/ic_action_back.xml" value="0.213" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/drawable-anydpi/ic_action_message.xml" value="0.213" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/drawable/bottom_selected.xml" value="0.1" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/drawable/button_radius.xml" value="0.213" />
         <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/drawable/round_radius.xml" value="0.1" />
         <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/drawable/search_radius.xml" value="0.215" />
         <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/drawable/tablayout_indicator.xml" value="0.213" />
-        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/activity_main.xml" value="0.16" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/activity_main.xml" value="0.136" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/back_action_bar.xml" value="0.536" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/default_action_bar.xml" value="0.4" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/fragment_attention.xml" value="0.1" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/fragment_hom.xml" value="0.1" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/fragment_login.xml" value="0.264" />
         <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/fragment_main.xml" value="0.14945652173913043" />
-        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/home_action_bar.xml" value="0.4" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/fragment_message.xml" value="0.1" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/fragment_mine.xml" value="0.1" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/home_action_bar.xml" value="0.536" />
         <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/item_recycler_main.xml" value="0.14945652173913043" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/item_viewpager_main.xml" value="0.1" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.2" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/baseLib/src/main/res/drawable/ic_network_settings.xml" value="0.2135" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/baseLib/src/main/res/layout/activity_network_environment.xml" value="0.151268115942029" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/baseLib/src/main/res/layout/dialog_loading.xml" value="0.4" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/baseLib/src/main/res/xml/environment_preference.xml" value="0.151268115942029" />
       </map>
     </option>
   </component>

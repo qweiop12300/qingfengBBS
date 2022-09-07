@@ -1,57 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="25dp"
-    tools:context=".MainActivity"
-    >
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        >
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:title="hhhhhhhhhhhhhhhh"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:contentInsetLeft="0dp"
-            app:contentInsetStart="0dp"
-            android:background="@color/white">
-            <include
-                android:id="@+id/home_action_bar"
-                layout="@layout/home_action_bar">
-            </include>
-        </androidx.appcompat.widget.Toolbar>
+    android:paddingTop="25dp">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/main_tab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabPaddingStart="0dp"
-            app:tabPaddingEnd="0dp"
-            app:tabGravity="fill"
-            app:tabMaxWidth="0dp"
-            app:tabIndicatorFullWidth="false"
-            app:tabTextColor="@color/grayAndBlack"
-            app:tabSelectedTextColor="@color/skyBlue"
-            app:tabIndicatorGravity="bottom"
-            app:tabIndicatorHeight="5dp"
-            app:tabIndicatorColor="@color/skyBlue"
-            app:tabMode="scrollable">
-        </com.google.android.material.tabs.TabLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/main_viewpager"
+    <fragment
+        android:id="@+id/main_nav_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-    </androidx.viewpager2.widget.ViewPager2>
+        app:defaultNavHost="true"
+        android:layout_above="@+id/main_bottom"
+        app:navGraph="@navigation/bottom_navigation" />
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/main_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true"
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        android:background="@color/white"
+        app:itemTextColor="@color/bottom_selected"
+        app:itemIconTint="@color/bottom_selected"
+        app:elevation="1dp"
+        app:itemIconSize="32dp"
+        app:menu="@menu/bottom_navigation_menu">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+</RelativeLayout>

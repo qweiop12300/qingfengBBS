@@ -1,4 +1,4 @@
-package com.chenbaolu.qflt;
+package com.chenbaolu.qflt.ui.activity;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.chenbaolu.qflt.R;
 
 /**
  * 描述 :

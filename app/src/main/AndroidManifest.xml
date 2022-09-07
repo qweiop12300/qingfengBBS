@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.清风论坛">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".LogoSplashActivity"
+            android:name=".ui.activity.LogoSplashActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>

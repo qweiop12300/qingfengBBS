@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.chenbaolu.qflt.ui.fragment.HomeFragment"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_attention"
+        android:name="com.chenbaolu.qflt.ui.fragment.AttentionFragment"
+        tools:layout="@layout/fragment_attention" />
+
+    <fragment
+        android:id="@+id/navigation_message"
+        android:name="com.chenbaolu.qflt.ui.fragment.MessageFragment"
+        tools:layout="@layout/fragment_message" />
+
+
+    <fragment
+        android:id="@+id/navigation_mine"
+        android:name="com.chenbaolu.qflt.ui.fragment.MineFragment"
+        tools:layout="@layout/fragment_mine" />
+
+
+</navigation>

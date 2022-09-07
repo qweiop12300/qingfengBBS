@@ -10,4 +10,7 @@
     <color name="gray">#28100F0F</color>
     <color name="grayAndBlack">#CE5E5656</color>
     <color name="skyBlue">#03A9F4</color>
+    <color name="deepBlack">#333333</color>
+    <color name="red">#F44336</color>
+
 </resources>
