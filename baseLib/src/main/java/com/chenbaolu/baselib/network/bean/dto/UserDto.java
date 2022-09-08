@@ -1,4 +1,4 @@
-package com.chenbaolu.qflt.pojo.dto;
+package com.chenbaolu.baselib.network.bean.dto;
 
 
 public class UserDto {

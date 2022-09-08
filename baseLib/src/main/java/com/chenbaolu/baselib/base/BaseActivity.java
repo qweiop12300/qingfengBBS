@@ -1,4 +1,4 @@
-package com.chenbaolu.qflt.ui.activity;
+package com.chenbaolu.baselib.base;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -8,11 +8,12 @@ import android.view.WindowManager;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.chenbaolu.qflt.R;
+import com.chenbaolu.baselib.BaseApplication;
+import com.chenbaolu.baselib.R;
 
 /**
  * 描述 :
- * 创建时间 : 2022/9/3 10:10
+ * 创建时间 : 2022/9/8 08:51
  * 作者 : 23128
  */
 public class BaseActivity extends AppCompatActivity {
@@ -24,7 +25,8 @@ public class BaseActivity extends AppCompatActivity {
         }else{
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            getWindow().setStatusBarColor(getResources().getColor(R.color.black));
+            getWindow().setStatusBarColor(getResources().getColor(R.color.white));
         }
+        BaseApplication.getActivityManager().addActivity(this);
     }
 }

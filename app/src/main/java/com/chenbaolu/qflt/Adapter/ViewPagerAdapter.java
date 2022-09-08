@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chenbaolu.qflt.R;
+import com.chenbaolu.baselib.network.bean.pojo.PostType;
 
 import java.util.List;
 
@@ -19,9 +20,9 @@ import java.util.List;
  */
 public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.ViewHolder> {
 
-    List<String> titles;
+    List<PostType> titles;
 
-    public ViewPagerAdapter(List<String> titles) {
+    public ViewPagerAdapter(List<PostType> titles) {
         this.titles = titles;
     }
 

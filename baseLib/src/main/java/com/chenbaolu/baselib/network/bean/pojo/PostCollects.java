@@ -1,6 +1,7 @@
-package com.chenbaolu.qflt.pojo;
+package com.chenbaolu.baselib.network.bean.pojo;
 
-public class PostLike {
+
+public class PostCollects {
 
   private long user_id;
   private long post_id;

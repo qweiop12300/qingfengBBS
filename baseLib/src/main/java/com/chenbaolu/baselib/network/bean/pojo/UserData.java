@@ -1,4 +1,4 @@
-package com.chenbaolu.qflt.pojo;
+package com.chenbaolu.baselib.network.bean.pojo;
 
 import java.sql.Timestamp;
 

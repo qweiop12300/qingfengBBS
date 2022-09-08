@@ -1,4 +1,4 @@
-package com.chenbaolu.qflt.CallBack;
+package com.chenbaolu.baselib.CallBack;
 
 /**
  * 描述 :网络请求接口
@@ -8,6 +8,6 @@ package com.chenbaolu.qflt.CallBack;
 public interface LoadTasksCallBack<T> {
     void onSuccess(T t);
     void onStart();
-    void onFailed();
+    void onFailed(String message,Integer code);
     void onFinish();
 }

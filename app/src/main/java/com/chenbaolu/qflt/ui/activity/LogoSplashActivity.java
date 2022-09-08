@@ -4,8 +4,8 @@ package com.chenbaolu.qflt.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.chenbaolu.qflt.ui.activity.BaseActivity;
-import com.chenbaolu.qflt.ui.activity.MainActivity;
+import com.chenbaolu.baselib.base.BaseActivity;
+
 
 public class LogoSplashActivity extends BaseActivity {
 
