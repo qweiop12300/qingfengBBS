@@ -29,4 +29,10 @@ public class BaseActivity extends AppCompatActivity {
         }
         BaseApplication.getActivityManager().addActivity(this);
     }
+
+    @Override
+    protected void onDestroy() {
+        BaseApplication.getActivityManager().removeActivity(this);
+        super.onDestroy();
+    }
 }

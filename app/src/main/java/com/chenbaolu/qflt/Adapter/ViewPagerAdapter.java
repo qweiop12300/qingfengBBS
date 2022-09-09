@@ -1,5 +1,8 @@
 package com.chenbaolu.qflt.Adapter;
 
+import android.annotation.SuppressLint;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,10 +10,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.chenbaolu.baselib.network.bean.pojo.Post;
+import com.chenbaolu.qflt.CallBack.OnRefreshCallBack;
 import com.chenbaolu.qflt.R;
 import com.chenbaolu.baselib.network.bean.pojo.PostType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,9 +28,14 @@ import java.util.List;
 public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.ViewHolder> {
 
     List<PostType> titles;
+    List<List<Post>> listItem;
+    OnRefreshCallBack onRefreshCallBack;
 
-    public ViewPagerAdapter(List<PostType> titles) {
+
+    public ViewPagerAdapter(List<PostType> titles, List<List<Post>> listItem, OnRefreshCallBack onRefreshCallBack) {
         this.titles = titles;
+        this.listItem = listItem;
+        this.onRefreshCallBack = onRefreshCallBack;
     }
 
     @NonNull
@@ -35,9 +47,32 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         RecyclerView recyclerView = holder.recyclerView;
+        SwipeRefreshLayout swipeRefreshLayout = holder.refreshLayout;
+        swipeRefreshLayout.setTag("swipe"+position);
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-        recyclerView.setAdapter(new RecyclerViewAdapter());
+        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(listItem.get(position));
+        recyclerView.setAdapter(recyclerViewAdapter);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Refresh(swipeRefreshLayout,holder.getAdapterPosition(),recyclerViewAdapter);
+            }
+        });
+        Refresh(swipeRefreshLayout,holder.getAdapterPosition(),recyclerViewAdapter);
+    }
+
+    public void Refresh(SwipeRefreshLayout swipeRefreshLayout, int position, RecyclerViewAdapter recyclerViewAdapter){
+        onRefreshCallBack.refresh(0,20, (int) titles.get(position).getId(),recyclerViewAdapter);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("test1","swipe:"+swipeRefreshLayout.toString()+"");
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        },2000);
     }
 
     @Override
@@ -47,9 +82,11 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         RecyclerView recyclerView;
+        SwipeRefreshLayout refreshLayout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            recyclerView = (RecyclerView) itemView;
+            recyclerView = (RecyclerView) itemView.findViewById(R.id.home_fragment_recycler);
+            refreshLayout = (SwipeRefreshLayout) itemView.findViewById(R.id.home_fragment_swipeRefresh);
         }
     }
 }

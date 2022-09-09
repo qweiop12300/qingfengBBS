@@ -23,13 +23,11 @@ public abstract class BaseObserver<T> implements Observer<T> {
 
     @Override
     public void onSubscribe(@NonNull Disposable d) {
-        Log.d("test1","su");
         loadTasksCallBack.onStart();
     }
 
     @Override
     public void onNext(@NonNull T t) {
-        Log.d("test1","next");
         BaseResult baseResult = (BaseResult) t;
         if(baseResult.getCode()!=200){
             loadTasksCallBack.onFailed(baseResult.getMessage(), baseResult.getCode());
@@ -40,18 +38,16 @@ public abstract class BaseObserver<T> implements Observer<T> {
 
     @Override
     public void onComplete() {
-        Log.d("test1","co");
         loadTasksCallBack.onFinish();
     }
 
     @Override
     public void onError(@NonNull Throwable e) {
-        Log.d("test1","error");
         Toast.makeText(BaseApplication.getContext(), "error", Toast.LENGTH_SHORT).show();
+        loadTasksCallBack.onFinish();
     }
 
     public void setLoadTasksCallBack(LoadTasksCallBack loadTasksCallBack){
-        Log.d("test1","set");
         this.loadTasksCallBack = loadTasksCallBack;
     }
 }

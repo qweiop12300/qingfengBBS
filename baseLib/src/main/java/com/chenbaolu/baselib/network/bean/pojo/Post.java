@@ -21,6 +21,8 @@ public class Post {
   private java.sql.Timestamp update_date;
   private Boolean top;
   private Boolean essence;
+  private Long plu;
+  private Long pcu;
 
   public long getId() {
     return id;
@@ -148,5 +150,21 @@ public class Post {
 
   public void setEssence(Boolean essence) {
     this.essence = essence;
+  }
+
+  public Long getPlu() {
+    return plu;
+  }
+
+  public void setPlu(Long plu) {
+    this.plu = plu;
+  }
+
+  public Long getPcu() {
+    return pcu;
+  }
+
+  public void setPcu(Long pcu) {
+    this.pcu = pcu;
   }
 }

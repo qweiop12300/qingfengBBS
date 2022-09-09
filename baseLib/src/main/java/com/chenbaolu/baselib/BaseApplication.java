@@ -36,7 +36,7 @@ public class BaseApplication extends Application {
                             .addConverterFactory(GsonConverterFactory.create())
                             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                             .client(OkHttpUtil.getUnsafeOkHttpClient())
-                            .baseUrl("https://192.168.124.105:8081/")
+                            .baseUrl("https://192.168.228.105:8081/")
                             .build();
                 }
             }

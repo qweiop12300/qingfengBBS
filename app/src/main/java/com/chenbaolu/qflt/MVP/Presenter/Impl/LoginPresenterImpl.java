@@ -1,30 +1,25 @@
 package com.chenbaolu.qflt.MVP.Presenter.Impl;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.chenbaolu.baselib.CallBack.LoadTasksCallBack;
 import com.chenbaolu.baselib.base.BasePresenter;
-import com.chenbaolu.baselib.network.bean.pojo.Post;
-import com.chenbaolu.baselib.network.bean.pojo.PostType;
-import com.chenbaolu.qflt.MVP.API.PostAPI;
-import com.chenbaolu.qflt.MVP.Presenter.HomePresenter;
-
-import java.util.List;
+import com.chenbaolu.baselib.network.bean.dto.UserDto;
+import com.chenbaolu.baselib.network.bean.pojo.UserData;
+import com.chenbaolu.qflt.MVP.API.UserAPI;
+import com.chenbaolu.qflt.MVP.Presenter.LoginPresenter;
 
 /**
  * 描述 :
- * 创建时间 : 2022/9/8 21:20
+ * 创建时间 : 2022/9/9 21:28
  * 作者 : 23128
  */
-public class HomePresenterImpl implements HomePresenter.Model {
-    HomePresenter.View view;
-
+public class LoginPresenterImpl implements LoginPresenter.Model {
+    LoginPresenter.View view;
     @Override
-    public void getPostType() {
-        PostAPI.getPostType(new LoadTasksCallBack<List<PostType>>() {
+    public void login(UserDto userDto) {
+        UserAPI.loginUser(userDto, new LoadTasksCallBack<UserData>() {
             @Override
-            public void onSuccess(List<PostType> list) {
-                view.initTabLayout(list);
+            public void onSuccess(UserData userData) {
+                view.loginSuccess(userData);
             }
 
             @Override
@@ -34,7 +29,7 @@ public class HomePresenterImpl implements HomePresenter.Model {
 
             @Override
             public void onFailed(String message, Integer code) {
-
+                view.loginFailed(message, code);
             }
 
             @Override
@@ -45,12 +40,11 @@ public class HomePresenterImpl implements HomePresenter.Model {
     }
 
     @Override
-    public void getListPost(Integer pg, Integer pz, int type_id, RecyclerView.Adapter adapter) {
-        PostAPI.getListPost(pg, pz, type_id, new LoadTasksCallBack<List<Post>>() {
+    public void registered(UserDto userDto) {
+        UserAPI.registerUser(userDto, new LoadTasksCallBack<String>() {
             @Override
-            public void onSuccess(List<Post> posts) {
-                boolean isAdd = pg==0?false:true;
-                view.updateRecyclerViewData(isAdd, posts, adapter);
+            public void onSuccess(String s) {
+                view.registeredSuccess(s);
             }
 
             @Override
@@ -60,7 +54,7 @@ public class HomePresenterImpl implements HomePresenter.Model {
 
             @Override
             public void onFailed(String message, Integer code) {
-
+                view.registeredFailed(message, code);
             }
 
             @Override
@@ -72,6 +66,6 @@ public class HomePresenterImpl implements HomePresenter.Model {
 
     @Override
     public void setBaseView(BasePresenter.BaseView baseView) {
-        view=(HomePresenter.View) baseView;
+        view = (LoginPresenter.View) baseView;
     }
 }

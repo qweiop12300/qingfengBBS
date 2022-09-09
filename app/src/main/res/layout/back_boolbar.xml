@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/white">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tool_bar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:text="登录"
+            android:textColor="@color/deepBlack"
+            android:textSize="18sp"
+            android:gravity="center">
+        </TextView>
+        <Button
+            android:id="@+id/tool_bar_back"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/ic_action_back"
+            android:layout_marginLeft="10dp"
+            >
+        </Button>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

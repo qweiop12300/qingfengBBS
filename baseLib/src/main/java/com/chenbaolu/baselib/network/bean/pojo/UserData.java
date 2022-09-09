@@ -67,4 +67,17 @@ public class UserData {
   public void setCreate_date(Timestamp create_date) {
     this.create_date = create_date;
   }
+
+  @Override
+  public String toString() {
+    return "UserData{" +
+            "user_id=" + user_id +
+            ", avatar='" + avatar + '\'' +
+            ", name='" + name + '\'' +
+            ", sex=" + sex +
+            ", type=" + type +
+            ", user_describe='" + user_describe + '\'' +
+            ", create_date=" + create_date +
+            '}';
+  }
 }

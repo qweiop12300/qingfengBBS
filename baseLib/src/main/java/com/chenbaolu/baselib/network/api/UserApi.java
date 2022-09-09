@@ -7,6 +7,7 @@ import com.chenbaolu.baselib.network.bean.pojo.UserData;
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 /**
@@ -17,12 +18,17 @@ import retrofit2.http.POST;
 public interface UserApi {
     @POST("loginUser")
     Observable<BaseResult<UserData>> loginUser(@Body UserDto userDto);
+
     @POST("registerUser")
     Observable<BaseResult<String>> registerUser(@Body UserDto userDto);
+
+    @FormUrlEncoded
     @POST("getUserData")
     Observable<BaseResult<UserData>> getUserData(@Field("userId")Long userId);
+
     @POST("getMyUserData")
     Observable<BaseResult<UserData>> getMyUserData();
+
     @POST("upUserData")
     Observable<BaseResult<String>> upUserData(@Body UserData userData);
 }

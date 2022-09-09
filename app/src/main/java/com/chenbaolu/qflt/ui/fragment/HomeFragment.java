@@ -1,29 +1,39 @@
 package com.chenbaolu.qflt.ui.fragment;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.chenbaolu.baselib.base.BasePresenter;
+import com.chenbaolu.baselib.network.bean.pojo.Post;
 import com.chenbaolu.baselib.network.bean.pojo.PostType;
+import com.chenbaolu.qflt.Adapter.RecyclerViewAdapter;
 import com.chenbaolu.qflt.Adapter.ViewPagerAdapter;
+import com.chenbaolu.qflt.CallBack.OnRefreshCallBack;
 import com.chenbaolu.qflt.MVP.Presenter.HomePresenter;
 import com.chenbaolu.qflt.MVP.Presenter.Impl.HomePresenterImpl;
+import com.chenbaolu.qflt.MyApplication;
 import com.chenbaolu.qflt.R;
+import com.chenbaolu.qflt.ui.activity.LoginActivity;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * 描述 :
@@ -36,6 +46,7 @@ public class HomeFragment extends Fragment implements HomePresenter.View {
     ViewPager2 viewPager2;
     TabLayout tabLayout;
     SwipeRefreshLayout swipeRefreshLayout;
+
 
     @Nullable
     @Override
@@ -50,18 +61,13 @@ public class HomeFragment extends Fragment implements HomePresenter.View {
         View rootView = getView();
         viewPager2= rootView.findViewById(R.id.home_viewpager);
         tabLayout = rootView.findViewById(R.id.home_tab);
-        swipeRefreshLayout = rootView.findViewById(R.id.home_swipe);
-
-
-
-        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+        CircleImageView circleImageView = rootView.findViewById(R.id.home_bar_circle);
+        circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-                if (viewPager2.getScrollState()== ViewPager2.SCROLL_STATE_DRAGGING){
-                    swipeRefreshLayout.setEnabled(false);
-                }else {
-                    swipeRefreshLayout.setEnabled(true);
+            public void onClick(View v) {
+                if (MyApplication.getToken()==""){
+                    Intent intent = new Intent(HomeFragment.this.getContext(), LoginActivity.class);
+                    startActivity(intent);
                 }
             }
         });
@@ -70,9 +76,28 @@ public class HomeFragment extends Fragment implements HomePresenter.View {
         model.getPostType();
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void initTabLayout(List<PostType> list) {
-        viewPager2.setAdapter(new ViewPagerAdapter(list));
+        List<List<Post>> listItem = new ArrayList<>();
+        for (PostType postType : list){
+            listItem.add(new ArrayList<Post>());
+        }
+        viewPager2.setAdapter(new ViewPagerAdapter(list, listItem, new OnRefreshCallBack() {
+            @Override
+            public void refresh(Integer pg, Integer pz, int typeId, RecyclerView.Adapter adapter) {
+                model.getListPost(pg,pz,typeId,adapter);
+            }
+        }));
+        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                swipeRefreshLayout = viewPager2.findViewWithTag("swipe"+position);
+            }
+        });
+
         new TabLayoutMediator(tabLayout,viewPager2,new TabLayoutMediator.TabConfigurationStrategy(){
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
@@ -82,13 +107,30 @@ public class HomeFragment extends Fragment implements HomePresenter.View {
     }
 
     @Override
+    public void updateRecyclerViewData(boolean isAdd, List<Post> posts, RecyclerView.Adapter adapter) {
+        RecyclerViewAdapter recyclerViewAdapter = (RecyclerViewAdapter) adapter;
+        if(isAdd){
+            int oldSize = recyclerViewAdapter.getList().size();
+            recyclerViewAdapter.getList().addAll(posts);
+            adapter.notifyItemRangeInserted(oldSize,recyclerViewAdapter.getList().size());
+        }else{
+            recyclerViewAdapter.setList(posts);
+            recyclerViewAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
     public void showLoading() {
-        swipeRefreshLayout.setRefreshing(true);
+        if(swipeRefreshLayout!=null){
+            swipeRefreshLayout.setRefreshing(true);
+        }
     }
 
     @Override
     public void dissLoading() {
-        swipeRefreshLayout.setRefreshing(false);
+        if(swipeRefreshLayout!=null){
+            swipeRefreshLayout.setRefreshing(false);
+        }
     }
 
     @Override
