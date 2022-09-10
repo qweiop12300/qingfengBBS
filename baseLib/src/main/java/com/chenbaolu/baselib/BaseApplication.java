@@ -2,6 +2,8 @@ package com.chenbaolu.baselib;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
 
 import java.io.IOException;
 
@@ -28,6 +30,8 @@ public class BaseApplication extends Application {
 
     private static volatile Retrofit retrofit;
 
+    private static SharedPreferences sharedPreferences;
+
     public static Retrofit getRetrofit(){
         if(retrofit==null){
             synchronized (BaseApplication.class){
@@ -36,7 +40,7 @@ public class BaseApplication extends Application {
                             .addConverterFactory(GsonConverterFactory.create())
                             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                             .client(OkHttpUtil.getUnsafeOkHttpClient())
-                            .baseUrl("https://192.168.228.105:8081/")
+                            .baseUrl("https://192.168.249.105:8081/")
                             .build();
                 }
             }
@@ -53,6 +57,7 @@ public class BaseApplication extends Application {
         activityManager = new ActivityManager();
         context = getApplicationContext();
         application = this;
+        sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
     }
 
 
@@ -66,6 +71,28 @@ public class BaseApplication extends Application {
 
     public static ActivityManager getActivityManager() {
         return activityManager;
+    }
+
+    public static String getToken(){
+        if (sharedPreferences!=null){
+            return sharedPreferences.getString("token","");
+        }
+        return "";
+    }
+    public static void setToken(String token){
+        if(sharedPreferences!=null){
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("token",token);
+            editor.apply();
+        }
+    }
+
+    public static SharedPreferences getSharedPreferences() {
+        return sharedPreferences;
+    }
+
+    public static void setSharedPreferences(SharedPreferences sharedPreferences) {
+        BaseApplication.sharedPreferences = sharedPreferences;
     }
 }
 

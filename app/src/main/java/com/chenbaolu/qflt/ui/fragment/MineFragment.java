@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.chenbaolu.qflt.R;
+
+import org.w3c.dom.Text;
 
 /**
  * 描述 :
@@ -21,5 +24,14 @@ public class MineFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_mine,container,false);
+    }
+
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        View rootView = getView();
+        TextView textView = rootView.findViewById(R.id.default_action_bar_title);
+        textView.setText("我的");
     }
 }

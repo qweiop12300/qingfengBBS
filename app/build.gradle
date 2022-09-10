@@ -45,5 +45,7 @@ dependencies {
 
     implementation project(path: ':baseLib')
 
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
+    
 
 }

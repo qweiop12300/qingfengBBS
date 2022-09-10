@@ -1,6 +1,7 @@
 package com.chenbaolu.qflt.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.chenbaolu.baselib.BaseApplication;
 import com.chenbaolu.baselib.CallBack.LoadTasksCallBack;
 import com.chenbaolu.baselib.network.bean.pojo.Post;
 import com.chenbaolu.qflt.MVP.API.PostAPI;
 import com.chenbaolu.qflt.R;
+import com.chenbaolu.qflt.ui.fragment.HomeFragment;
 
 import java.util.List;
 
@@ -61,6 +64,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.collects_size.setText(String.valueOf(post.getCollects()));
         holder.like.setImageDrawable(post.getPlu()!=null?context.getDrawable(R.drawable.ic_post_thumb2):context.getDrawable(R.drawable.ic_post_thumb));
         holder.collects.setImageDrawable(post.getPcu()!=null?context.getDrawable(R.drawable.ic_post_star2):context.getDrawable(R.drawable.ic_post_star));
+        Glide.with(context).load(post.getUser_data().getAvatar()).into(holder.circleImageView);
         ((RelativeLayout)holder.like.getParent()).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

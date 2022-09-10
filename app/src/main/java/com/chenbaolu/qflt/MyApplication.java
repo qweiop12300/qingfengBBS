@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.chenbaolu.baselib.BaseApplication;
+import com.chenbaolu.qflt.SQLite.MyDatabaseHelper;
+
 
 /**
  * 描述 :
@@ -11,19 +13,19 @@ import com.chenbaolu.baselib.BaseApplication;
  * 作者 : 23128
  */
 public class MyApplication extends BaseApplication {
-    static SharedPreferences sharedPreferences;
+
+    private static MyDatabaseHelper myDatabaseHelper;
     @Override
     public void onCreate() {
         super.onCreate();
-        sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+        myDatabaseHelper = new MyDatabaseHelper(this,"user_data",null,1);
+    }
 
+    public static MyDatabaseHelper getMyDatabaseHelper() {
+        return myDatabaseHelper;
     }
-    public static String getToken(){
-        return sharedPreferences.getString("token","");
-    }
-    public static void setToken(String token){
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("token",token);
-        editor.apply();
+
+    public static void setMyDatabaseHelper(MyDatabaseHelper myDatabaseHelper) {
+        myDatabaseHelper = myDatabaseHelper;
     }
 }

@@ -1,6 +1,7 @@
 package com.chenbaolu.qflt.ui.fragment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.bumptech.glide.Glide;
 import com.chenbaolu.baselib.base.BasePresenter;
 import com.chenbaolu.baselib.network.bean.pojo.Post;
 import com.chenbaolu.baselib.network.bean.pojo.PostType;
@@ -27,6 +29,7 @@ import com.chenbaolu.qflt.MVP.Presenter.Impl.HomePresenterImpl;
 import com.chenbaolu.qflt.MyApplication;
 import com.chenbaolu.qflt.R;
 import com.chenbaolu.qflt.ui.activity.LoginActivity;
+import com.chenbaolu.qflt.ui.activity.MainActivity;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -47,27 +50,33 @@ public class HomeFragment extends Fragment implements HomePresenter.View {
     TabLayout tabLayout;
     SwipeRefreshLayout swipeRefreshLayout;
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_home,container,false);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         View rootView = getView();
         viewPager2= rootView.findViewById(R.id.home_viewpager);
         tabLayout = rootView.findViewById(R.id.home_tab);
         CircleImageView circleImageView = rootView.findViewById(R.id.home_bar_circle);
+        SharedPreferences sharedPreferences = MyApplication.getSharedPreferences();
+        String image = sharedPreferences.getString("avatar","");
+        if(image!=null&&image!=""){
+            Glide.with(this).load(image).into(circleImageView);
+        }
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (MyApplication.getToken()==""){
                     Intent intent = new Intent(HomeFragment.this.getContext(), LoginActivity.class);
                     startActivity(intent);
+                }else{
+                    MainActivity mainActivity = (MainActivity) getActivity();
+                    mainActivity.navigate(R.id.navigation_mine);
                 }
             }
         });
@@ -75,6 +84,7 @@ public class HomeFragment extends Fragment implements HomePresenter.View {
         model.setBaseView(this);
         model.getPostType();
     }
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)

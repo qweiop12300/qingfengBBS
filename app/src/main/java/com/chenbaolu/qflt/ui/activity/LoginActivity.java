@@ -1,10 +1,12 @@
 package com.chenbaolu.qflt.ui.activity;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
 import com.chenbaolu.baselib.base.BaseActivity;
@@ -13,6 +15,7 @@ import com.chenbaolu.baselib.network.bean.dto.UserDto;
 import com.chenbaolu.baselib.network.bean.pojo.UserData;
 import com.chenbaolu.qflt.MVP.Presenter.Impl.LoginPresenterImpl;
 import com.chenbaolu.qflt.MVP.Presenter.LoginPresenter;
+import com.chenbaolu.qflt.MyApplication;
 import com.chenbaolu.qflt.R;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -118,7 +121,10 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View {
     @Override
     public void loginSuccess(UserData userData) {
         Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
-        Log.d("test1",userData.toString());
+        SharedPreferences.Editor editor = MyApplication.getSharedPreferences().edit();
+        editor.putString("avatar",userData.getAvatar());
+        editor.apply();
+        finish();
     }
 
     @Override
@@ -143,11 +149,11 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View {
 
     @Override
     public void showLoading() {
-        Toast.makeText(this, "开始", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
     public void dissLoading() {
-        Toast.makeText(this, "结束", Toast.LENGTH_SHORT).show();
+
     }
 }

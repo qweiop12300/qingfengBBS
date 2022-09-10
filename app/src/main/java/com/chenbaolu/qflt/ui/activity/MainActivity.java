@@ -12,9 +12,9 @@ import com.chenbaolu.qflt.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends BaseActivity {
+    NavController navController;
 
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -22,10 +22,13 @@ public class MainActivity extends BaseActivity {
     }
 
     protected void init(){
-
         BottomNavigationView navView = findViewById(R.id.main_bottom);
-        NavController navController = Navigation.findNavController(this, R.id.main_nav_fragment);
+        navController = Navigation.findNavController(this, R.id.main_nav_fragment);
         NavigationUI.setupWithNavController(navView, navController);
+    }
+
+    public void navigate(int id){
+        navController.navigate(id);
     }
 
 }
