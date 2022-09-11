@@ -2,7 +2,10 @@ package com.chenbaolu.baselib.network.api;
 
 import com.chenbaolu.baselib.network.bean.BaseResult;
 import com.chenbaolu.baselib.network.bean.dto.UserDto;
+import com.chenbaolu.baselib.network.bean.pojo.UserAttention;
 import com.chenbaolu.baselib.network.bean.pojo.UserData;
+
+import java.util.List;
 
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.Body;
@@ -25,6 +28,13 @@ public interface UserApi {
     @FormUrlEncoded
     @POST("getUserData")
     Observable<BaseResult<UserData>> getUserData(@Field("userId")Long userId);
+
+    @FormUrlEncoded
+    @POST("attention")
+    Observable<BaseResult<String>> attention(@Field("followed_user_id")Long userId);
+
+    @POST("getUserAttention")
+    Observable<BaseResult<List<UserAttention>>> getUserAttention(@Body UserAttention userAttention);
 
     @POST("getMyUserData")
     Observable<BaseResult<UserData>> getMyUserData();

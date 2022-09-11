@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/dialog_comments_card"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/dialog_comments_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="评论"
+                android:textSize="18sp"
+                android:textColor="@color/black">
+            </TextView>
+            <Button
+                android:id="@+id/dialog_comments_button"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/button_radius"
+                android:textSize="15sp"
+                android:text="发射"
+                android:textColor="@color/white">
+            </Button>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <com.chenbaolu.qflt.CustomizeView.EditText
+        android:id="@+id/dialog_comments_edit"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:textSize="15sp"
+        android:gravity="start"
+        android:layout_below="@+id/dialog_comments_card"
+        android:layout_marginTop="10dp">
+    </com.chenbaolu.qflt.CustomizeView.EditText>
+
+</RelativeLayout>

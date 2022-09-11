@@ -12,5 +12,5 @@
     <color name="skyBlue">#03A9F4</color>
     <color name="deepBlack">#333333</color>
     <color name="red">#F44336</color>
-
+    <color name="transparent">#00000000</color>
 </resources>

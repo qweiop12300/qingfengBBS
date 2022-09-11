@@ -6,7 +6,10 @@ import com.chenbaolu.baselib.CallBack.LoadTasksCallBack;
 import com.chenbaolu.baselib.network.api.UserApi;
 import com.chenbaolu.baselib.network.bean.BaseResult;
 import com.chenbaolu.baselib.network.bean.dto.UserDto;
+import com.chenbaolu.baselib.network.bean.pojo.UserAttention;
 import com.chenbaolu.baselib.network.bean.pojo.UserData;
+
+import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
@@ -58,6 +61,34 @@ public class UserAPI {
                     }
                 });
     }
+
+    public static void attention(Long userId, LoadTasksCallBack<String> loadTasksCallBack){
+        BaseApplication.getRetrofit().create(UserApi.class).attention(userId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseObserver<BaseResult<String>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        super.setLoadTasksCallBack(loadTasksCallBack);
+                        super.onSubscribe(d);
+                    }
+                });
+    }
+
+
+    public static void getUserAttention(UserAttention userAttention, LoadTasksCallBack<List<UserAttention>> loadTasksCallBack){
+        BaseApplication.getRetrofit().create(UserApi.class).getUserAttention(userAttention)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseObserver<BaseResult<List<UserAttention>>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        super.setLoadTasksCallBack(loadTasksCallBack);
+                        super.onSubscribe(d);
+                    }
+                });
+    }
+
     public static void getMyUserData(LoadTasksCallBack<UserData> loadTasksCallBack){
         BaseApplication.getRetrofit().create(UserApi.class).getMyUserData()
                 .subscribeOn(Schedulers.io())

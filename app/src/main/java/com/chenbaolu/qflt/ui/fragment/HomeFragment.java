@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +18,12 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
 import com.chenbaolu.baselib.base.BasePresenter;
+import com.chenbaolu.baselib.network.bean.dto.PostCommentsDto;
 import com.chenbaolu.baselib.network.bean.pojo.Post;
 import com.chenbaolu.baselib.network.bean.pojo.PostType;
-import com.chenbaolu.qflt.Adapter.RecyclerViewAdapter;
+import com.chenbaolu.qflt.Adapter.HomeRecyclerViewAdapter;
 import com.chenbaolu.qflt.Adapter.ViewPagerAdapter;
-import com.chenbaolu.qflt.CallBack.OnRefreshCallBack;
+import com.chenbaolu.qflt.CallBack.CurrentCallBack;
 import com.chenbaolu.qflt.MVP.Presenter.HomePresenter;
 import com.chenbaolu.qflt.MVP.Presenter.Impl.HomePresenterImpl;
 import com.chenbaolu.qflt.MyApplication;
@@ -94,7 +94,7 @@ public class HomeFragment extends Fragment implements HomePresenter.View {
         for (PostType postType : list){
             listItem.add(new ArrayList<Post>());
         }
-        viewPager2.setAdapter(new ViewPagerAdapter(list, listItem, new OnRefreshCallBack() {
+        viewPager2.setAdapter(new ViewPagerAdapter(list, listItem, new CurrentCallBack() {
             @Override
             public void refresh(Integer pg, Integer pz, int typeId, RecyclerView.Adapter adapter) {
                 model.getListPost(pg,pz,typeId,adapter);
@@ -118,14 +118,14 @@ public class HomeFragment extends Fragment implements HomePresenter.View {
 
     @Override
     public void updateRecyclerViewData(boolean isAdd, List<Post> posts, RecyclerView.Adapter adapter) {
-        RecyclerViewAdapter recyclerViewAdapter = (RecyclerViewAdapter) adapter;
+        HomeRecyclerViewAdapter homeRecyclerViewAdapter = (HomeRecyclerViewAdapter) adapter;
         if(isAdd){
-            int oldSize = recyclerViewAdapter.getList().size();
-            recyclerViewAdapter.getList().addAll(posts);
-            adapter.notifyItemRangeInserted(oldSize,recyclerViewAdapter.getList().size());
+            int oldSize = homeRecyclerViewAdapter.getList().size();
+            homeRecyclerViewAdapter.getList().addAll(posts);
+            adapter.notifyItemRangeInserted(oldSize, homeRecyclerViewAdapter.getList().size());
         }else{
-            recyclerViewAdapter.setList(posts);
-            recyclerViewAdapter.notifyDataSetChanged();
+            homeRecyclerViewAdapter.setList(posts);
+            homeRecyclerViewAdapter.notifyDataSetChanged();
         }
     }
 

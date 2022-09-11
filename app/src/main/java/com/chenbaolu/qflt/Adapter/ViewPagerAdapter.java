@@ -1,6 +1,5 @@
 package com.chenbaolu.qflt.Adapter;
 
-import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,11 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.chenbaolu.baselib.network.bean.pojo.Post;
-import com.chenbaolu.qflt.CallBack.OnRefreshCallBack;
+import com.chenbaolu.qflt.CallBack.CurrentCallBack;
 import com.chenbaolu.qflt.R;
 import com.chenbaolu.baselib.network.bean.pojo.PostType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,13 +27,13 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
 
     List<PostType> titles;
     List<List<Post>> listItem;
-    OnRefreshCallBack onRefreshCallBack;
+    CurrentCallBack currentCallBack;
 
 
-    public ViewPagerAdapter(List<PostType> titles, List<List<Post>> listItem, OnRefreshCallBack onRefreshCallBack) {
+    public ViewPagerAdapter(List<PostType> titles, List<List<Post>> listItem, CurrentCallBack currentCallBack) {
         this.titles = titles;
         this.listItem = listItem;
-        this.onRefreshCallBack = onRefreshCallBack;
+        this.currentCallBack = currentCallBack;
     }
 
     @NonNull
@@ -52,20 +50,20 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
         SwipeRefreshLayout swipeRefreshLayout = holder.refreshLayout;
         swipeRefreshLayout.setTag("swipe"+position);
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(listItem.get(position));
-        recyclerView.setAdapter(recyclerViewAdapter);
+        HomeRecyclerViewAdapter homeRecyclerViewAdapter = new HomeRecyclerViewAdapter(listItem.get(position));
+        recyclerView.setAdapter(homeRecyclerViewAdapter);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Refresh(swipeRefreshLayout,holder.getAdapterPosition(),recyclerViewAdapter);
+                Refresh(swipeRefreshLayout,holder.getAdapterPosition(), homeRecyclerViewAdapter);
             }
         });
-        Refresh(swipeRefreshLayout,holder.getAdapterPosition(),recyclerViewAdapter);
+        Refresh(swipeRefreshLayout,holder.getAdapterPosition(), homeRecyclerViewAdapter);
     }
 
-    public void Refresh(SwipeRefreshLayout swipeRefreshLayout, int position, RecyclerViewAdapter recyclerViewAdapter){
-        onRefreshCallBack.refresh(0,20, (int) titles.get(position).getId(),recyclerViewAdapter);
+    public void Refresh(SwipeRefreshLayout swipeRefreshLayout, int position, HomeRecyclerViewAdapter homeRecyclerViewAdapter){
+        currentCallBack.refresh(0,20, (int) titles.get(position).getId(), homeRecyclerViewAdapter);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

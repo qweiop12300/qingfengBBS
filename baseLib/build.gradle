@@ -47,4 +47,7 @@ dependencies {
 
 //    api 'com.qiniu:qiniu-android-sdk:8.4.+'
 
+    api "io.noties.markwon:core:4.6.2"
+
+
 }

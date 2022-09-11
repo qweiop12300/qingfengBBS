@@ -1,7 +1,7 @@
 package com.chenbaolu.qflt.Adapter;
 
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +19,7 @@ import com.chenbaolu.baselib.CallBack.LoadTasksCallBack;
 import com.chenbaolu.baselib.network.bean.pojo.Post;
 import com.chenbaolu.qflt.MVP.API.PostAPI;
 import com.chenbaolu.qflt.R;
-import com.chenbaolu.qflt.ui.fragment.HomeFragment;
+import com.chenbaolu.qflt.ui.activity.PostDetailsActivity;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * 创建时间 : 2022/9/4 19:08
  * 作者 : 23128
  */
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerViewAdapter.ViewHolder> {
 
     private List<Post> list;
     private Context context = BaseApplication.getContext();
@@ -43,7 +43,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.list = list;
     }
 
-    public RecyclerViewAdapter(List<Post> list) {
+    public HomeRecyclerViewAdapter(List<Post> list) {
         this.list = list;
     }
     @NonNull
@@ -65,6 +65,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.like.setImageDrawable(post.getPlu()!=null?context.getDrawable(R.drawable.ic_post_thumb2):context.getDrawable(R.drawable.ic_post_thumb));
         holder.collects.setImageDrawable(post.getPcu()!=null?context.getDrawable(R.drawable.ic_post_star2):context.getDrawable(R.drawable.ic_post_star));
         Glide.with(context).load(post.getUser_data().getAvatar()).into(holder.circleImageView);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, PostDetailsActivity.class);
+                intent.putExtra("id",post.getId());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
         ((RelativeLayout)holder.like.getParent()).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,7 +128,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     public void onFailed(String message, Integer code) {
                         if(code==202){
                             holder.collects.setImageDrawable(context.getDrawable(R.drawable.ic_post_star));
-                            post.setCollects(post.getCollects()+1);
+                            post.setCollects(post.getCollects()-1);
                             holder.collects_size.setText(String.valueOf(post.getCollects()));
                         }else{
                             Toast.makeText(context, "请登录", Toast.LENGTH_SHORT).show();

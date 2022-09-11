@@ -13,6 +13,15 @@ public class PostComments {
   private java.sql.Timestamp create_date;
   private long like;
   private String title;
+  private int layers;
+
+  public int getLayers() {
+    return layers;
+  }
+
+  public void setLayers(int layers) {
+    this.layers = layers;
+  }
 
   public long getId() {
     return id;
@@ -76,5 +85,20 @@ public class PostComments {
 
   public void setTitle(String title) {
     this.title = title;
+  }
+
+  @Override
+  public String toString() {
+    return "PostComments{" +
+            "id=" + id +
+            ", user_id=" + user_id +
+            ", user_data=" + user_data +
+            ", post_id=" + post_id +
+            ", reply_id=" + reply_id +
+            ", create_date=" + create_date +
+            ", like=" + like +
+            ", title='" + title + '\'' +
+            ", layers=" + layers +
+            '}';
   }
 }
