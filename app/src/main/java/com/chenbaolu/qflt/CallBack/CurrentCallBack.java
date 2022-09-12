@@ -11,5 +11,4 @@ import com.chenbaolu.baselib.network.bean.dto.PostCommentsDto;
  */
 public interface CurrentCallBack {
     void refresh(Integer pg,Integer pz,int typeId, RecyclerView.Adapter adapter);
-
 }

@@ -6,7 +6,9 @@ pluginManagement {
         jcenter()
         maven { url 'https://jitpack.io' }
     }
+
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -16,6 +18,7 @@ dependencyResolutionManagement {
         maven { url 'https://jitpack.io' }
     }
 }
+
 rootProject.name = "清风论坛"
 include ':app'
 include ':baseLib'

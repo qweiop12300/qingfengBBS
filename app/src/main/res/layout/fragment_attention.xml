@@ -1,7 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/default_action_bar"/>
-</RelativeLayout>
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+
+        >
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            app:layout_scrollFlags="scroll|enterAlways"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/default_action_bar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:text="关注"
+                    android:textColor="@color/deepBlack"
+                    android:textSize="18sp"
+                    android:gravity="center">
+                </TextView>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/attention_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabPaddingStart="0dp"
+            app:tabPaddingEnd="0dp"
+            app:tabGravity="fill"
+            app:tabMaxWidth="0dp"
+            app:tabIndicatorFullWidth="false"
+            app:tabTextColor="@color/grayAndBlack"
+            app:tabSelectedTextColor="@color/skyBlue"
+            app:tabIndicatorGravity="bottom"
+            app:tabIndicatorHeight="5dp"
+            app:tabIndicatorColor="@color/skyBlue"
+            app:tabMode="scrollable"
+            >
+        </com.google.android.material.tabs.TabLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/attention_viewpage2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    </androidx.viewpager2.widget.ViewPager2>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

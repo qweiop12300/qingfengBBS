@@ -7,12 +7,10 @@ package com.chenbaolu.baselib.base;
  */
 public interface BasePresenter {
     interface BaseView{
-        void setModel(BaseModel baseModel);
         void showLoading();
         void dissLoading();
-
     }
     interface BaseModel{
-        void setBaseView(BaseView baseView);
+        void setModel(BasePresenter.BaseView baseView);
     }
 }

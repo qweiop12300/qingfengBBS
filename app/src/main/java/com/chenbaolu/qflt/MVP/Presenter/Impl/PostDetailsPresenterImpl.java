@@ -12,8 +12,11 @@ import com.chenbaolu.baselib.network.bean.pojo.UserAttention;
 import com.chenbaolu.qflt.MVP.API.PostAPI;
 import com.chenbaolu.qflt.MVP.API.UserAPI;
 import com.chenbaolu.qflt.MVP.Presenter.PostDetailsPresenter;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 /**
  * 描述 :
@@ -22,8 +25,9 @@ import java.util.List;
  */
 public class PostDetailsPresenterImpl implements PostDetailsPresenter.Model {
     private PostDetailsPresenter.View view;
+
+    @Inject
     public PostDetailsPresenterImpl() {
-        super();
     }
 
     @Override
@@ -103,10 +107,6 @@ public class PostDetailsPresenterImpl implements PostDetailsPresenter.Model {
         });
     }
 
-    @Override
-    public void setBaseView(BasePresenter.BaseView baseView) {
-        view = (PostDetailsPresenter.View) baseView;
-    }
 
 
     @Override
@@ -211,5 +211,10 @@ public class PostDetailsPresenterImpl implements PostDetailsPresenter.Model {
                 view.dissLoading();
             }
         });
+    }
+
+    @Override
+    public void setModel(BasePresenter.BaseView baseView) {
+        view = (PostDetailsPresenter.View) baseView;
     }
 }

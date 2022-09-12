@@ -11,13 +11,20 @@ import com.chenbaolu.qflt.MVP.Presenter.HomePresenter;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * 描述 :
  * 创建时间 : 2022/9/8 21:20
  * 作者 : 23128
  */
+
 public class HomePresenterImpl implements HomePresenter.Model {
     HomePresenter.View view;
+
+    @Inject
+    public HomePresenterImpl() {
+    }
 
     @Override
     public void getPostType() {
@@ -70,8 +77,9 @@ public class HomePresenterImpl implements HomePresenter.Model {
         });
     }
 
+
     @Override
-    public void setBaseView(BasePresenter.BaseView baseView) {
-        view=(HomePresenter.View) baseView;
+    public void setModel(BasePresenter.BaseView baseView) {
+        this.view = (HomePresenter.View) baseView;
     }
 }

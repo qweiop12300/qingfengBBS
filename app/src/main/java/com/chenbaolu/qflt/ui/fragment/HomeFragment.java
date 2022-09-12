@@ -36,6 +36,9 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -43,9 +46,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * 创建时间 : 2022/9/7 21:02
  * 作者 : 23128
  */
+@AndroidEntryPoint
 public class HomeFragment extends Fragment implements HomePresenter.View {
+    @Inject
+    HomePresenter.Model model;
 
-    HomePresenter.Model model = new HomePresenterImpl();
     ViewPager2 viewPager2;
     TabLayout tabLayout;
     SwipeRefreshLayout swipeRefreshLayout;
@@ -53,6 +58,8 @@ public class HomeFragment extends Fragment implements HomePresenter.View {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//        DaggerHomeFragmentComponent.builder().build().inject(this);
+        model.setModel(this);
         return inflater.inflate(R.layout.fragment_home,container,false);
     }
 
@@ -81,7 +88,6 @@ public class HomeFragment extends Fragment implements HomePresenter.View {
             }
         });
 
-        model.setBaseView(this);
         model.getPostType();
     }
 
@@ -143,8 +149,4 @@ public class HomeFragment extends Fragment implements HomePresenter.View {
         }
     }
 
-    @Override
-    public void setModel(BasePresenter.BaseModel baseModel) {
-        model = (HomePresenter.Model) baseModel;
-    }
 }

@@ -11,6 +11,9 @@ import com.chenbaolu.baselib.base.BaseActivity;
 import com.chenbaolu.qflt.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class MainActivity extends BaseActivity {
     NavController navController;
 

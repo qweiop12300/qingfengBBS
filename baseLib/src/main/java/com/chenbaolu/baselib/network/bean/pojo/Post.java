@@ -24,6 +24,8 @@ public class Post {
   private Long plu;
   private Long pcu;
 
+
+
   public long getId() {
     return id;
   }

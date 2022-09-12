@@ -21,17 +21,21 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.regex.Pattern;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class LoginActivity extends BaseActivity implements LoginPresenter.View {
 
-    LoginPresenter.Model model = new LoginPresenterImpl();
-
+    @Inject
+    LoginPresenter.Model model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        model.setBaseView(this);
+        model.setModel(this);
         findViewById(R.id.tool_bar_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,10 +146,6 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void setModel(BasePresenter.BaseModel baseModel) {
-        model = (LoginPresenter.Model) baseModel;
-    }
 
     @Override
     public void showLoading() {

@@ -42,6 +42,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<CommentsRe
         this.postCommentsCallBack = postCommentsCallBack;
     }
 
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -58,6 +59,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<CommentsRe
         holder.title.setText(comments.getTitle());
         holder.size.setText(comments.getLike()+"");
         holder.name.setText(comments.getUser_data().getName());
+        holder.date.setText(comments.getCreate_date().toString());
         holder.like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,6 +129,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<CommentsRe
         TextView name;
         TextView size;
         RelativeLayout like;
+        TextView date;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             circleImageView = itemView.findViewById(R.id.comments_circle);
@@ -134,6 +137,15 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<CommentsRe
             name = itemView.findViewById(R.id.comments_name);
             like = (RelativeLayout) itemView.findViewById(R.id.comments_like).getParent();
             size = itemView.findViewById(R.id.like_size);
+            date = itemView.findViewById(R.id.comments_date);
         }
+    }
+
+    public List<PostComments> getList() {
+        return list;
+    }
+
+    public void setList(List<PostComments> list) {
+        this.list = list;
     }
 }

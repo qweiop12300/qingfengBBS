@@ -27,6 +27,16 @@
             android:layout_marginLeft="10dp">
         </TextView>
         <TextView
+            android:id="@+id/comments_date"
+            android:layout_toRightOf="@+id/comments_circle"
+            android:layout_below="@+id/comments_name"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="3dp"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content">
+        </TextView>
+        <TextView
             android:id="@+id/comments_title"
             android:layout_below="@+id/comments_circle"
             android:layout_marginTop="10dp"

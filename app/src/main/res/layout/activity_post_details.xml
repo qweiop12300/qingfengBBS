@@ -49,6 +49,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp">
                         </TextView>
+                        <TextView
+                            android:id="@+id/post_details_time"
+                            android:layout_below="@id/post_details_mark"
+                            android:layout_marginTop="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                        </TextView>
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView

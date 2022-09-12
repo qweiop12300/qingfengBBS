@@ -6,6 +6,9 @@ import com.chenbaolu.baselib.network.bean.dto.UserDto;
 import com.chenbaolu.baselib.network.bean.pojo.UserData;
 import com.chenbaolu.qflt.MVP.API.UserAPI;
 import com.chenbaolu.qflt.MVP.Presenter.LoginPresenter;
+import com.chenbaolu.qflt.ui.activity.LoginActivity;
+
+import javax.inject.Inject;
 
 /**
  * 描述 :
@@ -14,6 +17,11 @@ import com.chenbaolu.qflt.MVP.Presenter.LoginPresenter;
  */
 public class LoginPresenterImpl implements LoginPresenter.Model {
     LoginPresenter.View view;
+
+    @Inject
+    public LoginPresenterImpl() {
+    }
+
     @Override
     public void login(UserDto userDto) {
         UserAPI.loginUser(userDto, new LoadTasksCallBack<UserData>() {
@@ -65,7 +73,7 @@ public class LoginPresenterImpl implements LoginPresenter.Model {
     }
 
     @Override
-    public void setBaseView(BasePresenter.BaseView baseView) {
+    public void setModel(BasePresenter.BaseView baseView) {
         view = (LoginPresenter.View) baseView;
     }
 }

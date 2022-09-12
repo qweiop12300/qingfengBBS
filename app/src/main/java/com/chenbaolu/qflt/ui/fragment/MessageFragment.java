@@ -10,14 +10,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.chenbaolu.qflt.MVP.Presenter.MessagePresenter;
 import com.chenbaolu.qflt.R;
+
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
 
 /**
  * 描述 :
  * 创建时间 : 2022/9/7 21:02
  * 作者 : 23128
  */
-public class MessageFragment extends Fragment {
+@AndroidEntryPoint
+public class MessageFragment extends Fragment implements MessagePresenter.View {
+    @Inject
+    MessagePresenter.Model model;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -30,5 +39,15 @@ public class MessageFragment extends Fragment {
         View rootView = getView();
         TextView textView = rootView.findViewById(R.id.default_action_bar_title);
         textView.setText("消息");
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void dissLoading() {
+
     }
 }

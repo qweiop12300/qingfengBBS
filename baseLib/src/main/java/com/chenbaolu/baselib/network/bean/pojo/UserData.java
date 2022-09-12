@@ -12,6 +12,25 @@ public class UserData {
   private String user_describe;
   private java.sql.Timestamp create_date;
 
+  private long attention_size;
+  private long fan_size;
+
+  public long getAttention_size() {
+    return attention_size;
+  }
+
+  public void setAttention_size(long attention_size) {
+    this.attention_size = attention_size;
+  }
+
+  public long getFan_size() {
+    return fan_size;
+  }
+
+  public void setFan_size(long fan_size) {
+    this.fan_size = fan_size;
+  }
+
   public long getUser_id() {
     return user_id;
   }

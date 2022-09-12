@@ -34,9 +34,12 @@ import com.chenbaolu.qflt.util.CommentsSort;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.noties.markwon.Markwon;
-
+@AndroidEntryPoint
 public class PostDetailsActivity extends BaseActivity implements PostDetailsPresenter.View {
 
     private Long id;
@@ -48,17 +51,21 @@ public class PostDetailsActivity extends BaseActivity implements PostDetailsPres
     private CircleImageView circleImageView;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private TextView time;
 
     private ImageView like;
     private ImageView collects;
     private Button button;
 
 
-    private PostDetailsPresenter.Model model = new PostDetailsPresenterImpl();
+    @Inject
+    public PostDetailsPresenter.Model model;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_details);
+        model.setModel(this);
         Intent intent = getIntent();
         id = intent.getLongExtra("id",0);
         name = findViewById(R.id.back_action_bar_title);
@@ -68,6 +75,7 @@ public class PostDetailsActivity extends BaseActivity implements PostDetailsPres
         circleImageView = findViewById(R.id.back_action_bar_circle);
         recyclerView = findViewById(R.id.comments_rec);
         swipeRefreshLayout = findViewById(R.id.post_details_swipe);
+        time = findViewById(R.id.post_details_time);
 
         button = findViewById(R.id.back_action_bar_attention);
         like = findViewById(R.id.post_like);
@@ -104,13 +112,11 @@ public class PostDetailsActivity extends BaseActivity implements PostDetailsPres
                         postCommentsDto.setPostId(id);
                         postCommentsDto.setTitle(title);
                         model.setPostComments(postCommentsDto);
-                        model.getPostComments(id);
                     }
                 }).show();
             }
         });
 
-        model.setBaseView(this);
         init();
     }
 
@@ -132,6 +138,7 @@ public class PostDetailsActivity extends BaseActivity implements PostDetailsPres
         Glide.with(this).load(post.getUser_data().getAvatar()).into(circleImageView);
         name.setText(post.getUser_data().getName());
         title.setText(post.getTitle());
+        time.setText(post.getCreate_date().toString());
         Markwon markwon = Markwon.create(this);
         markwon.setMarkdown(markdownView,post.getContent());
         if (post.getPcu()!=null){
@@ -168,7 +175,6 @@ public class PostDetailsActivity extends BaseActivity implements PostDetailsPres
             @Override
             public void setComments(PostCommentsDto postCommentsDto) {
                 model.setPostComments(postCommentsDto);
-                model.getPostComments(id);
             }
 
             @Override
@@ -177,21 +183,15 @@ public class PostDetailsActivity extends BaseActivity implements PostDetailsPres
             }
         });
         recyclerView.setAdapter(recyclerViewAdapter);
-        recyclerViewAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void setPostCommentsResult(String result) {
         if (result==null){
-            Toast.makeText(this, "成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "发射成功", Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(this, "失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "发射失败", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    @Override
-    public void setModel(BasePresenter.BaseModel baseModel) {
-        model = (PostDetailsPresenter.Model) baseModel;
     }
 
     @Override
@@ -211,7 +211,7 @@ public class PostDetailsActivity extends BaseActivity implements PostDetailsPres
             like.setImageDrawable(getDrawable(R.drawable.ic_post_thumb2));
             return;
         }
-        Toast.makeText(this, "点赞失败", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "取消点赞", Toast.LENGTH_SHORT).show();
         like.setImageDrawable(getDrawable(R.drawable.ic_post_thumb));
     }
 
@@ -222,7 +222,7 @@ public class PostDetailsActivity extends BaseActivity implements PostDetailsPres
             collects.setImageDrawable(getDrawable(R.drawable.ic_post_star2));
             return;
         }
-        Toast.makeText(this, "收藏失败", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "取消收藏", Toast.LENGTH_SHORT).show();
         collects.setImageDrawable(getDrawable(R.drawable.ic_post_star));
     }
 
@@ -236,7 +236,7 @@ public class PostDetailsActivity extends BaseActivity implements PostDetailsPres
         }
         button.setText("关注");
         button.setBackground(getDrawable(R.drawable.button_radius));
-        Toast.makeText(this, "关注失败", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "取消关注", Toast.LENGTH_SHORT).show();
 
     }
 
