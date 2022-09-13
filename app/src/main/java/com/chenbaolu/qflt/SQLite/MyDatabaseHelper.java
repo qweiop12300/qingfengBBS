@@ -15,15 +15,26 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
 
-    String user_data = "CREATE TABLE `user_data` (\n" +
-            "  `user_id` int DEFAULT NULL,\n" +
-            "  `avatar` text ,\n" +
-            "  `name` tinytext ,\n" +
-            "  `sex` bit(1) ,\n" +
-            "  `type` tinyint(1) DEFAULT '0',\n" +
-            "  `create_date` datetime DEFAULT NULL ,\n" +
-            "  `user_describe` text \n" +
+    private String user_news = "create table `user_news`(\n" +
+            "                            `id` int,\n" +
+            "                            `user_id` int,\n" +
+            "                            `produce_user_id` int ,\n" +
+            "                            `type` int,\n" +
+            "                            `post_id` int ,\n" +
+            "                            `content` text ,\n" +
+            "                            `create_date` INTEGER,\n" +
+            "                            `type_text` text"+
             ")";
+    private String user_data = "CREATE TABLE `user_data` (\n" +
+            "                             `user_id` int ,\n" +
+            "                             `avatar` text,\n" +
+            "                             `name` tinytext,\n" +
+            "                             `sex` int,\n" +
+            "                             `type` int,\n" +
+            "                             `create_date` INTEGER,\n" +
+            "                             `user_describe` text\n" +
+            ");";
+
 
     public MyDatabaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -33,6 +44,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(user_data);
+        db.execSQL(user_news);
     }
 
     @Override

@@ -67,7 +67,6 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Log.d("test1","swipe:"+swipeRefreshLayout.toString()+"");
                 swipeRefreshLayout.setRefreshing(false);
             }
         },2000);

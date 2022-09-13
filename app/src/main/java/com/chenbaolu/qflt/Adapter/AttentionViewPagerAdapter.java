@@ -1,6 +1,7 @@
 package com.chenbaolu.qflt.Adapter;
 
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,8 +49,15 @@ public class AttentionViewPagerAdapter extends RecyclerView.Adapter<AttentionVie
             @Override
             public void onRefresh() {
                 currentCallBack.refresh(holder.getAdapterPosition(),0,0,adapter);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        holder.swipeRefreshLayout.setRefreshing(false);
+                    }
+                },2000);
             }
         });
+
 
     }
 

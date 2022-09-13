@@ -7,7 +7,10 @@ public class UserNews {
 
   private long id;
   private long user_id;
+  private UserData user_data;
+  private UserData p_user_data;
   private long produce_user_id;
+  private NewsType news_type;
   private long type;
   private long post_id;
   private java.sql.Timestamp create_date;
@@ -67,5 +70,46 @@ public class UserNews {
 
   public void setContent(String content) {
     this.content = content;
+  }
+
+
+  public UserData getP_user_data() {
+    return p_user_data;
+  }
+
+  public void setP_user_data(UserData p_user_data) {
+    this.p_user_data = p_user_data;
+  }
+
+  public NewsType getNews_type() {
+    return news_type;
+  }
+
+  public void setNews_type(NewsType news_type) {
+    this.news_type = news_type;
+  }
+
+  public UserData getUser_data() {
+    return user_data;
+  }
+
+  public void setUser_data(UserData user_data) {
+    this.user_data = user_data;
+  }
+
+  @Override
+  public String toString() {
+    return "UserNews{" +
+            "id=" + id +
+            ", user_id=" + user_id +
+            ", user_data=" + user_data +
+            ", p_user_data=" + p_user_data +
+            ", produce_user_id=" + produce_user_id +
+            ", news_type=" + news_type +
+            ", type=" + type +
+            ", post_id=" + post_id +
+            ", create_date=" + create_date +
+            ", content='" + content + '\'' +
+            '}';
   }
 }

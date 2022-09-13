@@ -30,7 +30,7 @@ public class MessageFragment extends Fragment implements MessagePresenter.View {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_message,container,false);
+        return inflater.inflate(R.layout.fragment_attention,container,false);
     }
 
     @Override
@@ -39,6 +39,7 @@ public class MessageFragment extends Fragment implements MessagePresenter.View {
         View rootView = getView();
         TextView textView = rootView.findViewById(R.id.default_action_bar_title);
         textView.setText("消息");
+
     }
 
     @Override

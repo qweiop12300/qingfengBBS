@@ -15,6 +15,19 @@ public class UserData {
   private long attention_size;
   private long fan_size;
 
+  public UserData() {
+  }
+
+  public UserData(long user_id, String avatar, String name, Boolean sex, long type, Timestamp create_date,String user_describe) {
+    this.user_id = user_id;
+    this.avatar = avatar;
+    this.name = name;
+    this.sex = sex;
+    this.type = type;
+    this.user_describe = user_describe;
+    this.create_date = create_date;
+  }
+
   public long getAttention_size() {
     return attention_size;
   }
