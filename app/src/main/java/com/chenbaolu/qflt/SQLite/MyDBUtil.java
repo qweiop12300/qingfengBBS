@@ -2,6 +2,7 @@ package com.chenbaolu.qflt.SQLite;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.chenbaolu.baselib.BaseApplication;
 import com.chenbaolu.baselib.network.bean.pojo.NewsType;
@@ -11,7 +12,10 @@ import com.chenbaolu.qflt.MyApplication;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+
+import io.reactivex.rxjava3.internal.util.LinkedArrayList;
 
 /**
  * 描述 :
@@ -49,18 +53,19 @@ public class MyDBUtil {
         contentValues.put("content",userNews.getContent());
         contentValues.put("create_date",userNews.getCreate_date().getTime());
         contentValues.put("type_text",userNews.getNews_type().getTitle());
+        contentValues.put("is_view",userNews.getIs_view());
         MyApplication.getMyDatabaseHelper().getWritableDatabase().insert("user_news",null,contentValues);
     }
 
-    public static List<UserNews> getUserNewsList(int type){
+    public static List<UserNews> getUserNewsList(String where,String[] strings){
         Cursor cursor = MyApplication.getMyDatabaseHelper().getWritableDatabase().rawQuery("" +
                 "select un.id id,un.type type,un.produce_user_id produce_user_id,un.user_id user_id,un.create_date create_date,un.content content,un.post_id post_id,un.type_text type_text,\n" +
                 "               u.user_id u_id,u.avatar u_avatar,u.name u_name,u.sex u_sex,u.type u_type,u.create_date u_cd,u.user_describe u_ud,\n" +
-                "               p.user_id p_id,p.avatar p_avatar,p.name p_name,p.sex p_sex,p.type p_type,p.create_date p_cd,p.user_describe p_ud\n" +
+                "               p.user_id p_id,p.avatar p_avatar,p.name p_name,p.sex p_sex,p.type p_type,p.create_date p_cd,p.user_describe p_ud,un.is_view is_view\n" +
                 "        from user_news un\n" +
                 "                 left join user_data u on u.user_id = un.user_id\n" +
                 "                 left join user_data p on p.user_id = un.produce_user_id\n" +
-                "        where un.type = ?;",new String[]{String.valueOf(type)});
+                "        where "+where+" order by un.create_date desc",strings);
 
         return getUserNews(cursor);
     }
@@ -71,15 +76,18 @@ public class MyDBUtil {
             do {
                 UserNews userNews  = new UserNews();
                 userNews.setId(cursor.getInt(0));
-                userNews.setUser_id(cursor.getInt(1));
+                userNews.setUser_id(cursor.getInt(3));
                 userNews.setProduce_user_id(cursor.getInt(2));
-                userNews.setType(cursor.getInt(3));
-                userNews.setPost_id(cursor.getInt(4));
+                Log.d("test1",cursor.getInt(1)+"--------------------");
+                userNews.setType(cursor.getInt(1));
+                userNews.setPost_id(cursor.getInt(6));
                 userNews.setContent(cursor.getString(5));
-                userNews.setCreate_date(new Timestamp(cursor.getLong(6)));
+                userNews.setCreate_date(new Timestamp(cursor.getLong(4)));
                 userNews.setNews_type(new NewsType(userNews.getType(),cursor.getString(7)));
                 userNews.setUser_data(new UserData(cursor.getInt(8),cursor.getString(9),cursor.getString(10),cursor.getInt(11)==0?false:true,cursor.getInt(12),new Timestamp(cursor.getLong(13)),cursor.getString(14)));
                 userNews.setP_user_data(new UserData(cursor.getInt(15),cursor.getString(16),cursor.getString(17),cursor.getInt(18)==0?false:true,cursor.getInt(19),new Timestamp(cursor.getLong(20)),cursor.getString(21)));
+                userNews.setIs_view(cursor.getInt(22));
+                list.add(userNews);
             }while (cursor.moveToNext());
         }
         return list;

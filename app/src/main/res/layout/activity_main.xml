@@ -20,7 +20,6 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentBottom="true"
-
         android:background="@color/white"
         app:itemTextColor="@color/bottom_selected"
         app:itemIconTint="@color/bottom_selected"

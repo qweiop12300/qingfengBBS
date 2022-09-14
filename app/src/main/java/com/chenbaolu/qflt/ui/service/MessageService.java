@@ -103,7 +103,6 @@ public class MessageService extends Service {
                             }else{
                                 byteBuffer.flip();
                                 stringBuffer.append(StandardCharsets.UTF_8.decode(byteBuffer).toString());
-
                                 Message message = gson.fromJson(stringBuffer.toString(), Message.class);
                                 RxBus.getInstance().post(message);
                                 stringBuffer.setLength(0);

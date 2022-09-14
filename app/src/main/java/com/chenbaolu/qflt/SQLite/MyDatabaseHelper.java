@@ -23,8 +23,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             "                            `post_id` int ,\n" +
             "                            `content` text ,\n" +
             "                            `create_date` INTEGER,\n" +
-            "                            `type_text` text"+
+            "                            `type_text` text,\n"+
+            "                            `is_view` int \n"+
             ")";
+
     private String user_data = "CREATE TABLE `user_data` (\n" +
             "                             `user_id` int ,\n" +
             "                             `avatar` text,\n" +

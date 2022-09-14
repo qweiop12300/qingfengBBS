@@ -31,8 +31,7 @@ public class MyApplication extends BaseApplication {
         RxBus.getInstance().toObservable(Message.class).subscribe(new Consumer<Message>() {
             @Override
             public void accept(Message message) throws Throwable {
-                Log.d("test1",message.toString());
-                if(message.getType().equals("send")){
+                if(message.getType().equals("send")||message.getType().equals("mySend")){
                     for (UserNews userNews:message.getData().getNews()){
                         Log.d("test1",userNews.toString());
                         MyDBUtil.setUserNews(userNews);

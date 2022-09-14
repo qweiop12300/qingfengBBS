@@ -15,6 +15,7 @@ public class UserNews {
   private long post_id;
   private java.sql.Timestamp create_date;
   private String content;
+  private int is_view;
 
   public long getId() {
     return id;
@@ -95,6 +96,14 @@ public class UserNews {
 
   public void setUser_data(UserData user_data) {
     this.user_data = user_data;
+  }
+
+  public int getIs_view() {
+    return is_view;
+  }
+
+  public void setIs_view(int is_view) {
+    this.is_view = is_view;
   }
 
   @Override

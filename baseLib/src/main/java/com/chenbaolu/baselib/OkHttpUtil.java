@@ -87,6 +87,8 @@ public class OkHttpUtil {
                             }
                             token = response.header("set-Authorization","");
                             if(!token.equals(""))BaseApplication.setToken(token);
+                            String userId = response.header("set-UserId","");
+                            if (!userId.equals(""))BaseApplication.setUserId(Long.valueOf(userId));
                             return response;
                         }
                     })

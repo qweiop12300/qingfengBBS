@@ -1,9 +1,11 @@
 package com.chenbaolu.qflt.ui.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
 import com.chenbaolu.baselib.base.BasePresenter;
+import com.chenbaolu.baselib.network.bean.SocketBean.Message;
 import com.chenbaolu.baselib.network.bean.dto.PostCommentsDto;
 import com.chenbaolu.baselib.network.bean.pojo.Post;
 import com.chenbaolu.baselib.network.bean.pojo.PostType;
@@ -28,6 +31,7 @@ import com.chenbaolu.qflt.MVP.Presenter.HomePresenter;
 import com.chenbaolu.qflt.MVP.Presenter.Impl.HomePresenterImpl;
 import com.chenbaolu.qflt.MyApplication;
 import com.chenbaolu.qflt.R;
+import com.chenbaolu.qflt.RxBus.RxBus;
 import com.chenbaolu.qflt.ui.activity.LoginActivity;
 import com.chenbaolu.qflt.ui.activity.MainActivity;
 import com.google.android.material.tabs.TabLayout;
@@ -40,6 +44,7 @@ import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.reactivex.rxjava3.functions.Consumer;
 
 /**
  * 描述 :
@@ -60,15 +65,16 @@ public class HomeFragment extends Fragment implements HomePresenter.View {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        DaggerHomeFragmentComponent.builder().build().inject(this);
         model.setModel(this);
-        return inflater.inflate(R.layout.fragment_home,container,false);
+        Log.d("test2","cre");
+        View rootView = inflater.inflate(R.layout.fragment_home,container,false);
+        init(rootView);
+        return rootView;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        View rootView = getView();
+    public void init(View rootView){
         viewPager2= rootView.findViewById(R.id.home_viewpager);
         tabLayout = rootView.findViewById(R.id.home_tab);
+        View view = rootView.findViewById(R.id.home_bar_newmessage);
         CircleImageView circleImageView = rootView.findViewById(R.id.home_bar_circle);
         SharedPreferences sharedPreferences = MyApplication.getSharedPreferences();
         String image = sharedPreferences.getString("avatar","");
@@ -78,13 +84,29 @@ public class HomeFragment extends Fragment implements HomePresenter.View {
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (MyApplication.getToken()==""){
+                if (MyApplication.getToken().equals("")){
                     Intent intent = new Intent(HomeFragment.this.getContext(), LoginActivity.class);
                     startActivity(intent);
                 }else{
                     MainActivity mainActivity = (MainActivity) getActivity();
                     mainActivity.navigate(R.id.navigation_mine);
                 }
+            }
+        });
+        RxBus.getInstance().toObservable(Message.class).subscribe(new Consumer<Message>() {
+            @Override
+            public void accept(Message message) throws Throwable {
+                if(message.getType().equals("send")){
+                    if (message.getData().getNews().size()>0){
+                        view.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        });
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                view.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -147,6 +169,18 @@ public class HomeFragment extends Fragment implements HomePresenter.View {
         if(swipeRefreshLayout!=null){
             swipeRefreshLayout.setRefreshing(false);
         }
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        Log.d("test2","att");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d("test2","des");
     }
 
 }

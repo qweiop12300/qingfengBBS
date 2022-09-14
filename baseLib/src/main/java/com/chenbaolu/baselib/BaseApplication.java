@@ -32,6 +32,10 @@ public class BaseApplication extends Application {
 
     private static SharedPreferences sharedPreferences;
 
+    private volatile static String token;
+
+    private volatile static Long userId;
+
     public static Retrofit getRetrofit(){
         if(retrofit==null){
             synchronized (BaseApplication.class){
@@ -74,15 +78,36 @@ public class BaseApplication extends Application {
     }
 
     public static String getToken(){
-        if (sharedPreferences!=null){
-            return sharedPreferences.getString("token","");
+        if (token==null){
+            synchronized (Application.class){
+                if (token==null){
+                    if (sharedPreferences!=null){
+                        token = sharedPreferences.getString("token","");
+                    }
+                }
+            }
         }
-        return "";
+        return token;
     }
-    public static void setToken(String token){
+    public static void setToken(String token2){
+        token = token2;
         if(sharedPreferences!=null){
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("token",token);
+            editor.apply();
+        }
+    }
+
+    public static Long getUserId() {
+        userId = sharedPreferences.getLong("userId",0);
+        return userId;
+    }
+
+    public static void setUserId(Long userId2) {
+        userId = userId2;
+        if(sharedPreferences!=null){
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putLong("userId",userId);
             editor.apply();
         }
     }
@@ -94,5 +119,7 @@ public class BaseApplication extends Application {
     public static void setSharedPreferences(SharedPreferences sharedPreferences) {
         BaseApplication.sharedPreferences = sharedPreferences;
     }
+
+
 }
 

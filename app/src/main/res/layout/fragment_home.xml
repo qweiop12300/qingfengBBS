@@ -63,7 +63,7 @@ android:layout_height="match_parent">
             android:layout_alignTop="@id/home_bar_news"
             android:layout_marginTop="14dp"
             android:layout_marginRight="11dp"
-            android:visibility="visible"
+            android:visibility="invisible"
             >
         </View>
     </RelativeLayout>

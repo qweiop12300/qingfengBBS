@@ -3,12 +3,44 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/navigation_home">
+
+
+    <action
+        android:id="@+id/to_home"
+        app:destination="@id/navigation_home"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/navigation_home"
+        app:popUpToInclusive="true"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+        app:popExitAnim="@animator/nav_default_pop_exit_anim" />
+    <action
+        android:id="@+id/to_attention"
+        app:destination="@id/navigation_attention"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/navigation_home"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/to_message"
+        app:destination="@id/navigation_message"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/navigation_home"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/to_mine"
+        app:destination="@id/navigation_mine"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/navigation_home"
+        app:popUpToInclusive="true" />
+
 
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.chenbaolu.qflt.ui.fragment.HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_attention"
