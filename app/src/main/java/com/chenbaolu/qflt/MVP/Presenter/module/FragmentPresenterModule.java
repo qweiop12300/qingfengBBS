@@ -9,9 +9,12 @@ import com.chenbaolu.qflt.MVP.Presenter.Impl.MinePresenterImpl;
 import com.chenbaolu.qflt.MVP.Presenter.MessagePresenter;
 import com.chenbaolu.qflt.MVP.Presenter.MinePresenter;
 
+import javax.inject.Singleton;
+
 import dagger.Binds;
 import dagger.Module;
 import dagger.hilt.InstallIn;
+import dagger.hilt.android.components.ActivityComponent;
 import dagger.hilt.android.components.FragmentComponent;
 
 /**
@@ -20,8 +23,10 @@ import dagger.hilt.android.components.FragmentComponent;
  * 作者 : 23128
  */
 @Module
-@InstallIn(FragmentComponent.class)
+@InstallIn(ActivityComponent.class)
 public abstract class FragmentPresenterModule {
+
+
     @Binds
     public abstract HomePresenter.Model bindHomeModel(HomePresenterImpl homePresenter);
 

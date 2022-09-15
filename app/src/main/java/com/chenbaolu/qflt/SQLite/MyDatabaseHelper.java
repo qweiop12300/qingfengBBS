@@ -27,15 +27,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             "                            `is_view` int \n"+
             ")";
 
-    private String user_data = "CREATE TABLE `user_data` (\n" +
-            "                             `user_id` int ,\n" +
-            "                             `avatar` text,\n" +
-            "                             `name` tinytext,\n" +
-            "                             `sex` int,\n" +
-            "                             `type` int,\n" +
-            "                             `create_date` INTEGER,\n" +
-            "                             `user_describe` text\n" +
-            ");";
+
 
 
     public MyDatabaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
@@ -45,7 +37,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(user_data);
         db.execSQL(user_news);
     }
 

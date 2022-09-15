@@ -6,6 +6,7 @@ import com.chenbaolu.baselib.network.bean.pojo.UserAttention;
 import com.chenbaolu.baselib.network.bean.pojo.UserData;
 
 import java.util.List;
+import java.util.Set;
 
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.Body;
@@ -28,6 +29,9 @@ public interface UserApi {
     @FormUrlEncoded
     @POST("getUserData")
     Observable<BaseResult<UserData>> getUserData(@Field("userId")Long userId);
+
+    @POST("getUserDataList")
+    Observable<BaseResult<List<UserData>>> getUserDataList(@Body Set<Long> list);
 
     @FormUrlEncoded
     @POST("attention")

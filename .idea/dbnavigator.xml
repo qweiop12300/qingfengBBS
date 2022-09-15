@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DataExportManager">
@@ -29,13 +29,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="9743554f-b0bf-4827-9dd9-b9924125f77a">
-      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select un.id id,un.type type,un.produce_user_id produce_user_id,un.user_id user_id,un.create_date create_date,un.content content,un.post_id post_id,un.type_text type_text,
-u.user_id u_id,u.avatar u_avatar,u.name u_name,u.sex u_sex,u.type u_type,u.create_date u_cd,u.user_describe u_ud,
-p.user_id p_id,p.avatar p_avatar,p.name p_name,p.sex p_sex,p.type p_type,p.create_date p_cd,p.user_describe p_ud,un.is_view is_view
-from user_news un
-left join user_data u on u.user_id = un.user_id
-left join user_data p on p.user_id = un.produce_user_id
-where un.type = 5;]]></console>
+      <console name="Connection" type="STANDARD" schema="main" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
@@ -45,7 +39,7 @@ where un.type = 5;]]></console>
     <connection id="9743554f-b0bf-4827-9dd9-b9924125f77a" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="9743554f-b0bf-4827-9dd9-b9924125f77a" dataset="main.user_news" active-filter-id="5606b625-cfab-412d-b547-d9af7dd2d126">
+    <filter-actions connection-id="9743554f-b0bf-4827-9dd9-b9924125f77a" dataset="main.user_news" active-filter-id="EMPTY_FILTER">
       <filter id="5606b625-cfab-412d-b547-d9af7dd2d126" name="1" temporary="false" custom-name="false" type="basic" join-type="AND">
         <condition column="type" operator="=" value="1" active="true" />
       </filter>
@@ -96,7 +90,7 @@ where un.type = 5;]]></console>
           <port value="" />
           <database value="" />
           <files>
-            <file path="C:\Users\Chen\Desktop\my_db" schema="main" />
+            <file path="C:\Users\Chen\Desktop\my_dbs" schema="main" />
           </files>
           <type value="NONE" />
           <user value="" />

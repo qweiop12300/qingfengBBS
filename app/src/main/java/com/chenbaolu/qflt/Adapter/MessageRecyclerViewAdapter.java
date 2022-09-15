@@ -26,6 +26,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -34,29 +35,35 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * 创建时间 : 2022/9/12 21:04
  * 作者 : 23128
  */
-public class MessageRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MessageRecyclerViewAdapter extends RecyclerView.Adapter<MessageRecyclerViewAdapter.ViewHolder> {
     private Context context;
     private List<UserNews> list;
+    private Map<Long,UserData> userDataMap;
 
     private Map<Long,List<UserNews>> map;
 
 
-    public MessageRecyclerViewAdapter(Context context, List<UserNews> list) {
-        this.list = list;
+
+    public MessageRecyclerViewAdapter(Context context, List<UserNews> list,Map<Long,UserData> userDataMap) {
+
         this.context = context;
+        this.userDataMap = userDataMap;
 
         if (list.size()>0){
-            if (list.get(0).getType()==5){
+            if (list.get(0).getType()==1){
                 Long userId = BaseApplication.getUserId();
                 if (userId!=0){
-
                     map = assort(list,userId);
                 }else{
                     map = new LinkedHashMap<>();
                 }
-
+                list = getAirList();
+                for (Long set : map.keySet()){
+                    list.add(map.get(set).get(0));
+                }
             }
         }
+        this.list = list;
     }
 
     public static List<UserNews> getAirList(){
@@ -103,37 +110,24 @@ public class MessageRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
 
-    @Override
-    public int getItemViewType(int position) {
-        if (list.get(position).getType()==5){
-            return 1;
-        }
-        return 0;
-    }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (viewType==0){
-            View view = LayoutInflater.from(context).inflate(R.layout.card_message,parent,false);
-            return new ViewHolder(view);
-        }else{
-            View view = LayoutInflater.from(context).inflate(R.layout.card_message,parent,false);
-            return new ViewHolder(view);
-        }
+        View view = LayoutInflater.from(context).inflate(R.layout.card_message,parent,false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if(holder instanceof MessageRecyclerViewAdapter.ViewHolder){
-            MessageRecyclerViewAdapter.ViewHolder holder1 = (MessageRecyclerViewAdapter.ViewHolder) holder;
-            UserNews userNews = list.get(position);
-            Glide.with(context).load(userNews.getUser_data().getAvatar()).into(holder1.circleImageView);
-            holder1.message.setText(userNews.getNews_type().getTitle());
-            holder1.name.setText(userNews.getUser_data().getName());
-        }else{
-
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        UserNews userNews = list.get(position);
+        Glide.with(context).load(userDataMap.get(userNews.getUser_id()).getAvatar()).into(holder.circleImageView);
+        holder.name.setText(userDataMap.get(userNews.getUser_id()).getName());
+        if(userNews.getType()==1){
+            holder.message.setText(userNews.getContent());
+        }else {
+            holder.message.setText(userNews.getNews_type().getTitle());
         }
+
     }
 
 

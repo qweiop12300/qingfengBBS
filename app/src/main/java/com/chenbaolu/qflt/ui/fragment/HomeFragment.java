@@ -63,12 +63,15 @@ public class HomeFragment extends Fragment implements HomePresenter.View {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        DaggerHomeFragmentComponent.builder().build().inject(this);
         model.setModel(this);
-        Log.d("test2","cre");
         View rootView = inflater.inflate(R.layout.fragment_home,container,false);
-        init(rootView);
         return rootView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        init(getView());
     }
 
     public void init(View rootView){
@@ -89,7 +92,6 @@ public class HomeFragment extends Fragment implements HomePresenter.View {
                     startActivity(intent);
                 }else{
                     MainActivity mainActivity = (MainActivity) getActivity();
-                    mainActivity.navigate(R.id.navigation_mine);
                 }
             }
         });
@@ -172,15 +174,10 @@ public class HomeFragment extends Fragment implements HomePresenter.View {
     }
 
     @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        Log.d("test2","att");
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d("test2","des");
+        model.setModel(null);
+        model=null;
     }
 
 }

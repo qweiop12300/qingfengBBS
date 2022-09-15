@@ -82,4 +82,5 @@ public class HomePresenterImpl implements HomePresenter.Model {
     public void setModel(BasePresenter.BaseView baseView) {
         this.view = (HomePresenter.View) baseView;
     }
+
 }

@@ -10,6 +10,7 @@ import com.chenbaolu.baselib.network.bean.pojo.UserAttention;
 import com.chenbaolu.baselib.network.bean.pojo.UserData;
 
 import java.util.List;
+import java.util.Set;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
@@ -56,6 +57,19 @@ public class UserAPI {
                 .subscribe(new BaseObserver<BaseResult<UserData>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
+                        super.setLoadTasksCallBack(loadTasksCallBack);
+                        super.onSubscribe(d);
+                    }
+                });
+    }
+
+    public static void getUserDataList(Set<Long> list , LoadTasksCallBack<List<UserData>> loadTasksCallBack){
+        BaseApplication.getRetrofit().create(UserApi.class).getUserDataList(list)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseObserver<BaseResult<List<UserData>>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
                         super.setLoadTasksCallBack(loadTasksCallBack);
                         super.onSubscribe(d);
                     }

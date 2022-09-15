@@ -2,6 +2,7 @@ package com.chenbaolu.qflt.Adapter;
 
 import android.content.Context;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.chenbaolu.qflt.CallBack.CurrentCallBack;
 import com.chenbaolu.qflt.R;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 描述 :
@@ -27,10 +29,12 @@ public class MessageViewPagerAdapter extends RecyclerView.Adapter<MessageViewPag
     private Context context;
     private List<List<UserNews>> list;
     private CurrentCallBack currentCallBack;
-    public MessageViewPagerAdapter(Context context, List<List<UserNews>> list, CurrentCallBack currentCallBack) {
+    private Map<Long,UserData> userDataMap;
+    public MessageViewPagerAdapter(Context context, List<List<UserNews>> list, Map<Long,UserData> userDataMap, CurrentCallBack currentCallBack) {
         this.list = list;
         this.currentCallBack = currentCallBack;
         this.context =context;
+        this.userDataMap = userDataMap;
     }
 
     @NonNull
@@ -43,7 +47,7 @@ public class MessageViewPagerAdapter extends RecyclerView.Adapter<MessageViewPag
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        MessageRecyclerViewAdapter adapter = new MessageRecyclerViewAdapter(context,list.get(position));
+        MessageRecyclerViewAdapter adapter = new MessageRecyclerViewAdapter(context,list.get(position),userDataMap);
         holder.recyclerView.setAdapter(adapter);
         holder.swipeRefreshLayout.setTag("m_swipe_"+position);
         holder.swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

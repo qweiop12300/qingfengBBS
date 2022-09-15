@@ -33,7 +33,7 @@ public class MyApplication extends BaseApplication {
             public void accept(Message message) throws Throwable {
                 if(message.getType().equals("send")||message.getType().equals("mySend")){
                     for (UserNews userNews:message.getData().getNews()){
-                        Log.d("test1",userNews.toString());
+                        Log.d("test10",userNews.toString());
                         MyDBUtil.setUserNews(userNews);
                     }
                 }

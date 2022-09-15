@@ -1,23 +1,21 @@
 package com.chenbaolu.qflt.ui.activity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.chenbaolu.baselib.base.BaseActivity;
-import com.chenbaolu.baselib.network.bean.SocketBean.Message;
 import com.chenbaolu.qflt.MyApplication;
 import com.chenbaolu.qflt.R;
-import com.chenbaolu.qflt.RxBus.RxBus;
+import com.chenbaolu.qflt.ui.fragment.AttentionFragment;
+import com.chenbaolu.qflt.ui.fragment.HomeFragment;
+import com.chenbaolu.qflt.ui.fragment.MessageFragment;
+import com.chenbaolu.qflt.ui.fragment.MineFragment;
 import com.chenbaolu.qflt.ui.service.MessageService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -29,7 +27,6 @@ import io.reactivex.rxjava3.functions.Consumer;
 
 @AndroidEntryPoint
 public class MainActivity extends BaseActivity {
-    NavController navController;
     Intent intent;
 
     @Override
@@ -42,26 +39,49 @@ public class MainActivity extends BaseActivity {
     protected void init(){
         BottomNavigationView navView = findViewById(R.id.main_bottom);
 
+        HomeFragment homeFragment = new HomeFragment();
+        MineFragment mineFragment = new MineFragment();
+        MessageFragment messageFragment = new MessageFragment();
+        AttentionFragment attentionFragment = new AttentionFragment();
 
-        navController = Navigation.findNavController(this, R.id.main_nav_fragment);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        fragmentManager.beginTransaction()
+                .add(R.id.main_fragment,homeFragment)
+                .add(R.id.main_fragment,mineFragment)
+                .add(R.id.main_fragment,messageFragment)
+                .add(R.id.main_fragment,attentionFragment)
+                .show(homeFragment)
+                .hide(mineFragment)
+                .hide(messageFragment)
+                .hide(attentionFragment)
+                .commit();
+
 
         navView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                        .hide(homeFragment)
+                        .hide(mineFragment)
+                        .hide(messageFragment)
+                        .hide(attentionFragment);
                 switch (item.getItemId()){
                     case R.id.navigation_home:
-                        navController.navigate(R.id.to_home);
+                        fragmentTransaction.show(homeFragment);
                         break;
                     case R.id.navigation_attention:
-                        navController.navigate(R.id.to_attention);
-                        break;
-                    case R.id.navigation_mine:
-                        navController.navigate(R.id.to_mine);
+                        fragmentTransaction.show(attentionFragment);
                         break;
                     case R.id.navigation_message:
-                        navController.navigate(R.id.to_message);
+                        fragmentTransaction.show(messageFragment);
+                        break;
+
+                    case R.id.navigation_mine:
+                        fragmentTransaction.show(mineFragment);
                         break;
                 }
+                fragmentTransaction.commit();
                 return true;
             }
         });
@@ -71,10 +91,6 @@ public class MainActivity extends BaseActivity {
             intent = new Intent(this, MessageService.class);
             startService(intent);
         }
-    }
-
-    public void navigate(int id){
-        navController.navigate(id);
     }
 
     @Override
