@@ -2,6 +2,7 @@ package com.chenbaolu.baselib.network.api;
 
 import com.chenbaolu.baselib.network.bean.BaseResult;
 import com.chenbaolu.baselib.network.bean.dto.UserDto;
+import com.chenbaolu.baselib.network.bean.pojo.QiNiuToken;
 import com.chenbaolu.baselib.network.bean.pojo.UserAttention;
 import com.chenbaolu.baselib.network.bean.pojo.UserData;
 
@@ -45,4 +46,8 @@ public interface UserApi {
 
     @POST("upUserData")
     Observable<BaseResult<String>> upUserData(@Body UserData userData);
+
+    @POST("getQiNiuToken")
+    Observable<BaseResult<QiNiuToken>> getQiNiuToken();
+
 }

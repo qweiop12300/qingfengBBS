@@ -4,7 +4,9 @@ import com.chenbaolu.baselib.network.bean.BaseResult;
 import com.chenbaolu.baselib.network.bean.dto.PostCommentsDto;
 import com.chenbaolu.baselib.network.bean.dto.PostDto;
 import com.chenbaolu.baselib.network.bean.pojo.Post;
+import com.chenbaolu.baselib.network.bean.pojo.PostCollects;
 import com.chenbaolu.baselib.network.bean.pojo.PostComments;
+import com.chenbaolu.baselib.network.bean.pojo.PostLike;
 import com.chenbaolu.baselib.network.bean.pojo.PostType;
 
 import java.util.List;
@@ -26,14 +28,23 @@ public interface PostApi {
 
     @FormUrlEncoded
     @POST("getListPost")
-    Observable<BaseResult<List<Post>>> getListPost(@Field("pg") Integer pg, @Field("pz") Integer pz, @Field("type_id") int type_id);
+    Observable<BaseResult<List<Post>>> getListPost(@Field("pg") Integer pg, @Field("pz") Integer pz, @Field("type_id") int type_id,@Field("uid") int uid);
 
     @POST("setPostComments")
     Observable<BaseResult<String>> setPostComments(@Body PostCommentsDto postCommentsDto);
 
     @FormUrlEncoded
     @POST("getPostComments")
-    Observable<BaseResult<List<PostComments>>> getPostComments(@Field("postId") Long postId);
+    Observable<BaseResult<List<PostComments>>> getPostComments(@Field("postId") Long postId,@Field("userId") Long userId);
+
+    @FormUrlEncoded
+    @POST("getPostLike")
+    Observable<BaseResult<List<PostLike>>> getPostLike(@Field("userId") Long userId);
+
+    @FormUrlEncoded
+    @POST("getPostCollects")
+    Observable<BaseResult<List<PostCollects>>> getPostCollects(@Field("userId") Long userId);
+
 
     @FormUrlEncoded
     @POST("getPost")

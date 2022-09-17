@@ -39,6 +39,8 @@ import java.util.Set;
 import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Consumer;
 
 /**
@@ -57,6 +59,7 @@ public class MessageFragment extends Fragment implements MessagePresenter.View {
     private TabLayout tabLayout;
     private MessageViewPagerAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private Disposable disposable;
 
 
     @Nullable
@@ -88,10 +91,14 @@ public class MessageFragment extends Fragment implements MessagePresenter.View {
         }
         model.getUserDataList(userDataMap.keySet());
 
-        RxBus.getInstance().toObservable(Message.class).subscribe(new Consumer<Message>() {
+        RxBus.getInstance().toObservable(Message.class).subscribe(new Observer<Message>() {
             @Override
-            public void accept(Message message) throws Throwable {
+            public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+                disposable = d;
+            }
 
+            @Override
+            public void onNext(@io.reactivex.rxjava3.annotations.NonNull Message message) {
                 if(message.getType().equals("send")||message.getType().equals("mySend")){
                     if(message.getData().getNews().size()!=0){
                         UserNews userNews = message.getData().getNews().get(0);
@@ -113,6 +120,16 @@ public class MessageFragment extends Fragment implements MessagePresenter.View {
                         }
                     }
                 }
+            }
+
+            @Override
+            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
             }
         });
     }
@@ -177,5 +194,11 @@ public class MessageFragment extends Fragment implements MessagePresenter.View {
             newsList.get((int) (userNews.getType()-1)).add(0,userNews);
             adapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        disposable.dispose();
     }
 }

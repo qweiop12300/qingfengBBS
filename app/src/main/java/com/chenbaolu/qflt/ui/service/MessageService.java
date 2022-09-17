@@ -41,7 +41,7 @@ public class MessageService extends Service {
 
     private SocketChannel socketChannel;
 
-    class MessageServiceIBinder extends Binder {
+    public class MessageServiceIBinder extends Binder {
         public void sendMessage(Message message){
             MessageService.this.sendMessage(message);
         }

@@ -8,7 +8,9 @@ import com.chenbaolu.baselib.network.bean.BaseResult;
 import com.chenbaolu.baselib.network.bean.dto.PostCommentsDto;
 import com.chenbaolu.baselib.network.bean.dto.PostDto;
 import com.chenbaolu.baselib.network.bean.pojo.Post;
+import com.chenbaolu.baselib.network.bean.pojo.PostCollects;
 import com.chenbaolu.baselib.network.bean.pojo.PostComments;
+import com.chenbaolu.baselib.network.bean.pojo.PostLike;
 import com.chenbaolu.baselib.network.bean.pojo.PostType;
 
 import java.util.List;
@@ -37,8 +39,8 @@ public class PostAPI {
                     }
                 });
     }
-    public static void getListPost(Integer pg,Integer pz, int type_id, LoadTasksCallBack<List<Post>> loadTasksCallBack){
-        BaseApplication.getRetrofit().create(PostApi.class).getListPost(pg, pz, type_id)
+    public static void getListPost(Integer pg,Integer pz, int type_id,int uid, LoadTasksCallBack<List<Post>> loadTasksCallBack){
+        BaseApplication.getRetrofit().create(PostApi.class).getListPost(pg, pz, type_id,uid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<BaseResult<List<Post>>>() {
@@ -61,8 +63,8 @@ public class PostAPI {
                     }
                 });
     }
-    public static void getPostComments(Long postId, LoadTasksCallBack<List<PostComments>> loadTasksCallBack){
-        BaseApplication.getRetrofit().create(PostApi.class).getPostComments(postId)
+    public static void getPostComments(Long postId, Long userId,LoadTasksCallBack<List<PostComments>> loadTasksCallBack){
+        BaseApplication.getRetrofit().create(PostApi.class).getPostComments(postId,userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<BaseResult<List<PostComments>>>() {
@@ -73,6 +75,33 @@ public class PostAPI {
                     }
                 });
     }
+
+    public static void getPostLike(Long userId, LoadTasksCallBack<List<PostLike>> loadTasksCallBack){
+        BaseApplication.getRetrofit().create(PostApi.class).getPostLike(userId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseObserver<BaseResult<List<PostLike>>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        super.setLoadTasksCallBack(loadTasksCallBack);
+                        super.onSubscribe(d);
+                    }
+                });
+    }
+
+    public static void getPostCollects(Long postId, LoadTasksCallBack<List<PostCollects>> loadTasksCallBack){
+        BaseApplication.getRetrofit().create(PostApi.class).getPostCollects(postId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseObserver<BaseResult<List<PostCollects>>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        super.setLoadTasksCallBack(loadTasksCallBack);
+                        super.onSubscribe(d);
+                    }
+                });
+    }
+
     public static void getPost(Long postId, LoadTasksCallBack<Post> loadTasksCallBack){
         BaseApplication.getRetrofit().create(PostApi.class).getPost(postId)
                 .subscribeOn(Schedulers.io())

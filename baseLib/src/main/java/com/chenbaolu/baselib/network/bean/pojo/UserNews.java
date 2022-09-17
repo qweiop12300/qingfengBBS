@@ -17,6 +17,14 @@ public class UserNews {
   private String content;
   private int is_view;
 
+  public UserNews() {
+  }
+
+  public UserNews(long produce_user_id, String content) {
+    this.produce_user_id = produce_user_id;
+    this.content = content;
+  }
+
   public long getId() {
     return id;
   }

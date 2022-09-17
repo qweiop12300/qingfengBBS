@@ -47,12 +47,21 @@ public class MyDBUtil {
 
         return getUserNews(cursor);
     }
+    public static List<UserNews> getUserNewsListAsc(String where,String[] strings){
+        Cursor cursor = MyApplication.getMyDatabaseHelper().getWritableDatabase().rawQuery("" +
+                "select * from user_news "+
+                "        where "+where+" order by create_date desc",strings);
+
+        return getUserNews(cursor);
+    }
+
     public static List<UserNews> getUserNewsTypeOne(String id){
         Cursor cursor = MyApplication.getMyDatabaseHelper().getWritableDatabase().rawQuery("select * from (select * from user_news where user_id != ? and type = 1 order by create_date desc) group by user_id \n" +
                 "union \n" +
                 "select * from (select * from user_news where user_id = ? and type =1 order by create_date desc ) group by produce_user_id",new String[]{id,id});
         return getUserNews(cursor);
     }
+
 
     public static List<UserNews> getUserNews(Cursor cursor){
         List<UserNews> list = new ArrayList<>();

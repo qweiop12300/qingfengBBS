@@ -20,6 +20,7 @@ import com.chenbaolu.baselib.network.bean.pojo.Post;
 import com.chenbaolu.qflt.MVP.API.PostAPI;
 import com.chenbaolu.qflt.R;
 import com.chenbaolu.qflt.ui.activity.PostDetailsActivity;
+import com.chenbaolu.qflt.ui.activity.UserDetailActivity;
 
 import java.util.List;
 
@@ -142,6 +143,18 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
                 });
             }
         });
+
+        View.OnClickListener click = new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, UserDetailActivity.class);
+                intent.putExtra("id",post.getUser_id());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        };
+        holder.circleImageView.setOnClickListener(click);
+        holder.textView.setOnClickListener(click);
     }
 
     @Override

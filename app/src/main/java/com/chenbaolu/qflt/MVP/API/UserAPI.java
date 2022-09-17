@@ -6,6 +6,7 @@ import com.chenbaolu.baselib.CallBack.LoadTasksCallBack;
 import com.chenbaolu.baselib.network.api.UserApi;
 import com.chenbaolu.baselib.network.bean.BaseResult;
 import com.chenbaolu.baselib.network.bean.dto.UserDto;
+import com.chenbaolu.baselib.network.bean.pojo.QiNiuToken;
 import com.chenbaolu.baselib.network.bean.pojo.UserAttention;
 import com.chenbaolu.baselib.network.bean.pojo.UserData;
 
@@ -120,6 +121,19 @@ public class UserAPI {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<BaseResult<String>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        super.setLoadTasksCallBack(loadTasksCallBack);
+                        super.onSubscribe(d);
+                    }
+                });
+    }
+
+    public static void getQiNiuToken(LoadTasksCallBack<QiNiuToken> loadTasksCallBack){
+        BaseApplication.getRetrofit().create(UserApi.class).getQiNiuToken()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseObserver<BaseResult<QiNiuToken>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                         super.setLoadTasksCallBack(loadTasksCallBack);

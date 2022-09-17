@@ -57,7 +57,7 @@ public class PostDetailsPresenterImpl implements PostDetailsPresenter.Model {
 
     @Override
     public void getPostComments(long id) {
-        PostAPI.getPostComments(id, new LoadTasksCallBack<List<PostComments>>() {
+        PostAPI.getPostComments(id,0L, new LoadTasksCallBack<List<PostComments>>() {
             @Override
             public void onSuccess(List<PostComments> postComments) {
                 view.showPostComments(postComments);

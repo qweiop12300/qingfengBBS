@@ -1,5 +1,6 @@
 package com.chenbaolu.qflt.ui.activity;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,6 +9,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +20,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.request.target.Target;
+import com.chenbaolu.baselib.BaseApplication;
 import com.chenbaolu.baselib.base.BaseActivity;
 import com.chenbaolu.baselib.base.BasePresenter;
 import com.chenbaolu.baselib.network.bean.dto.PostCommentsDto;
@@ -29,6 +34,7 @@ import com.chenbaolu.qflt.CallBack.PostCommentsCallBack;
 import com.chenbaolu.qflt.Dialog.PostCommentsBottomDialog;
 import com.chenbaolu.qflt.MVP.Presenter.Impl.PostDetailsPresenterImpl;
 import com.chenbaolu.qflt.MVP.Presenter.PostDetailsPresenter;
+import com.chenbaolu.qflt.MyApplication;
 import com.chenbaolu.qflt.R;
 import com.chenbaolu.qflt.util.CommentsSort;
 
@@ -39,6 +45,9 @@ import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.noties.markwon.Markwon;
+import io.noties.markwon.image.AsyncDrawable;
+import io.noties.markwon.image.glide.GlideImagesPlugin;
+
 @AndroidEntryPoint
 public class PostDetailsActivity extends BaseActivity implements PostDetailsPresenter.View {
 
@@ -81,8 +90,6 @@ public class PostDetailsActivity extends BaseActivity implements PostDetailsPres
         like = findViewById(R.id.post_like);
         collects = findViewById(R.id.post_star);
 
-
-
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -96,6 +103,14 @@ public class PostDetailsActivity extends BaseActivity implements PostDetailsPres
                 finish();
             }
         });
+
+
+
+        init();
+    }
+
+    public void init(){
+
         findViewById(R.id.post_comments).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,10 +132,6 @@ public class PostDetailsActivity extends BaseActivity implements PostDetailsPres
             }
         });
 
-        init();
-    }
-
-    public void init(){
         model.getPost(id);
         model.getPostComments(id);
     }
@@ -139,8 +150,9 @@ public class PostDetailsActivity extends BaseActivity implements PostDetailsPres
         name.setText(post.getUser_data().getName());
         title.setText(post.getTitle());
         time.setText(post.getCreate_date().toString());
-        Markwon markwon = Markwon.create(this);
-        markwon.setMarkdown(markdownView,post.getContent());
+
+        MyApplication.getMarkwon().setMarkdown(markdownView,post.getContent());
+
         if (post.getPcu()!=null){
             collects.setImageDrawable(getDrawable(R.drawable.ic_post_star2));
         }

@@ -32,6 +32,7 @@ import com.chenbaolu.qflt.MVP.Presenter.Impl.HomePresenterImpl;
 import com.chenbaolu.qflt.MyApplication;
 import com.chenbaolu.qflt.R;
 import com.chenbaolu.qflt.RxBus.RxBus;
+import com.chenbaolu.qflt.ui.activity.AddPostActivity;
 import com.chenbaolu.qflt.ui.activity.LoginActivity;
 import com.chenbaolu.qflt.ui.activity.MainActivity;
 import com.google.android.material.tabs.TabLayout;
@@ -65,19 +66,15 @@ public class HomeFragment extends Fragment implements HomePresenter.View {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         model.setModel(this);
         View rootView = inflater.inflate(R.layout.fragment_home,container,false);
+        init(rootView);
         return rootView;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        init(getView());
     }
 
     public void init(View rootView){
         viewPager2= rootView.findViewById(R.id.home_viewpager);
         tabLayout = rootView.findViewById(R.id.home_tab);
         View view = rootView.findViewById(R.id.home_bar_newmessage);
+
         CircleImageView circleImageView = rootView.findViewById(R.id.home_bar_circle);
         SharedPreferences sharedPreferences = MyApplication.getSharedPreferences();
         String image = sharedPreferences.getString("avatar","");
@@ -92,6 +89,7 @@ public class HomeFragment extends Fragment implements HomePresenter.View {
                     startActivity(intent);
                 }else{
                     MainActivity mainActivity = (MainActivity) getActivity();
+                    mainActivity.showFragment(4);
                 }
             }
         });
@@ -109,6 +107,14 @@ public class HomeFragment extends Fragment implements HomePresenter.View {
             @Override
             public void onClick(View v) {
                 view.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        rootView.findViewById(R.id.home_bar_add).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), AddPostActivity.class);
+                startActivity(intent);
             }
         });
 

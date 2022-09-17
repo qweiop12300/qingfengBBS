@@ -1,6 +1,7 @@
 package com.chenbaolu.qflt.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.chenbaolu.baselib.network.bean.pojo.User;
 import com.chenbaolu.baselib.network.bean.pojo.UserData;
 import com.chenbaolu.qflt.R;
+import com.chenbaolu.qflt.ui.activity.UserDetailActivity;
 
 import java.util.List;
 
@@ -45,6 +47,16 @@ public class AttentionRecyclerViewAdapter extends RecyclerView.Adapter<Attention
         UserData userData = list.get(position);
         Glide.with(context).load(userData.getAvatar()).into(holder.circleImageView);
         holder.textView.setText(userData.getName());
+        View.OnClickListener click = new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, UserDetailActivity.class);
+                intent.putExtra("id",userData.getUser_id());
+                context.startActivity(intent);
+            }
+        };
+        holder.circleImageView.setOnClickListener(click);
+        holder.textView.setOnClickListener(click);
     }
 
     @Override

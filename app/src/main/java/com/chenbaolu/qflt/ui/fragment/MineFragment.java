@@ -1,5 +1,6 @@
 package com.chenbaolu.qflt.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +16,11 @@ import androidx.lifecycle.Lifecycle;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
+import com.chenbaolu.baselib.BaseApplication;
 import com.chenbaolu.baselib.network.bean.pojo.UserData;
 import com.chenbaolu.qflt.MVP.Presenter.MinePresenter;
 import com.chenbaolu.qflt.R;
+import com.chenbaolu.qflt.ui.activity.MinePostActivity;
 
 import org.commonmark.node.Text;
 
@@ -51,14 +54,8 @@ public class MineFragment extends Fragment implements MinePresenter.View {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         model.setModel(this);
-        return inflater.inflate(R.layout.fragment_mine,container,false);
-    }
 
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        View rootView = getView();
+        View rootView = inflater.inflate(R.layout.fragment_mine,container,false);
         TextView textView = rootView.findViewById(R.id.default_action_bar_title);
         textView.setText("我的");
         swipeRefreshLayout = rootView.findViewById(R.id.mine_swipe);
@@ -77,10 +74,48 @@ public class MineFragment extends Fragment implements MinePresenter.View {
             }
         });
         init();
+        return rootView;
     }
+
 
     void init(){
         model.getMyUserData();
+        r1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), MinePostActivity.class);
+                intent.putExtra("type","我的帖子");
+                intent.putExtra("id", BaseApplication.getUserId());
+                getContext().startActivity(intent);
+            }
+        });
+        r2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), MinePostActivity.class);
+                intent.putExtra("type","我的点赞");
+                intent.putExtra("id", BaseApplication.getUserId());
+                getContext().startActivity(intent);
+            }
+        });
+        r3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), MinePostActivity.class);
+                intent.putExtra("type","我的收藏");
+                intent.putExtra("id", BaseApplication.getUserId());
+                getContext().startActivity(intent);
+            }
+        });
+        r4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), MinePostActivity.class);
+                intent.putExtra("type","我的评论");
+                intent.putExtra("id", BaseApplication.getUserId());
+                getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

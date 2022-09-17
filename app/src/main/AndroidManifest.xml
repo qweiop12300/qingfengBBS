@@ -3,6 +3,8 @@
     package="com.chenbaolu.qflt">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".MyApplication"
@@ -13,6 +15,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.清风论坛">
+        <activity
+            android:name=".ui.activity.AddPostActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:name=".ui.activity.MinePostActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.UserDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.DialogActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.activity.PostDetailsActivity"
             android:exported="false" />
@@ -33,10 +48,10 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".ui.service.MessageService"
+        <service
+            android:name=".ui.service.MessageService"
             android:enabled="true"
-            android:exported="true">
-        </service>
+            android:exported="true" />
     </application>
 
 </manifest>

@@ -16,14 +16,19 @@
         <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/drawable/round_radius.xml" value="0.1" />
         <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/drawable/search_radius.xml" value="0.215" />
         <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/drawable/tablayout_indicator.xml" value="0.213" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/activity_add_post.xml" value="0.264" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/activity_dialog.xml" value="0.2" />
         <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/activity_login.xml" value="0.4" />
         <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/activity_main.xml" value="0.136" />
-        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/activity_post_details.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/activity_mine_post.xml" value="0.1" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/activity_post_details.xml" value="0.210896309314587" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/activity_test.xml" value="0.4" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/activity_user_detail.xml" value="0.12454710144927536" />
         <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/back_action_bar.xml" value="0.536" />
         <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/back_boolbar.xml" value="0.4" />
         <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/card_message.xml" value="0.4" />
         <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/card_post_comments.xml" value="0.72" />
-        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/card_post_home.xml" value="0.5228070175438596" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/card_post_home.xml" value="0.44776119402985076" />
         <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/card_recycler_post_comments.xml" value="0.1" />
         <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/card_user_data.xml" value="0.35645933014354064" />
         <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/default_action_bar.xml" value="0.4" />
@@ -36,6 +41,8 @@
         <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/fragment_message.xml" value="0.1" />
         <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/fragment_mine.xml" value="0.4" />
         <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/home_action_bar.xml" value="0.536" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/item_dialog.xml" value="0.1" />
+        <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/item_image.xml" value="0.4" />
         <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/item_recycler_main.xml" value="0.14945652173913043" />
         <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/item_recycler_post_comments.xml" value="0.4" />
         <entry key="..\:/Users/Chen/AndroidStudioProjects/qingfengluntan/app/src/main/res/layout/item_viewpager_attention.xml" value="0.10696266397578204" />

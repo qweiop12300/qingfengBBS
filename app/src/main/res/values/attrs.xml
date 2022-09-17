@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DialogView">
+        <attr name="dialog_color" format="color"/>
+        <attr name="angle_height" format="float"/>
+        <attr name="angle_width" format="float"/>
+        <attr name="dialog_direction" format="boolean"/>
+    </declare-styleable>
+</resources>
