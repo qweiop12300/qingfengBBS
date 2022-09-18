@@ -39,8 +39,8 @@ public class PostAPI {
                     }
                 });
     }
-    public static void getListPost(Integer pg,Integer pz, int type_id,int uid, LoadTasksCallBack<List<Post>> loadTasksCallBack){
-        BaseApplication.getRetrofit().create(PostApi.class).getListPost(pg, pz, type_id,uid)
+    public static void getListPost(Integer pg,Integer pz, int type_id,int uid,String search, LoadTasksCallBack<List<Post>> loadTasksCallBack){
+        BaseApplication.getRetrofit().create(PostApi.class).getListPost(pg, pz, type_id,uid,search)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<BaseResult<List<Post>>>() {

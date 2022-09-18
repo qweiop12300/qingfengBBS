@@ -35,6 +35,7 @@ import com.chenbaolu.qflt.RxBus.RxBus;
 import com.chenbaolu.qflt.ui.activity.AddPostActivity;
 import com.chenbaolu.qflt.ui.activity.LoginActivity;
 import com.chenbaolu.qflt.ui.activity.MainActivity;
+import com.chenbaolu.qflt.ui.activity.SearchActivity;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -60,27 +61,55 @@ public class HomeFragment extends Fragment implements HomePresenter.View {
     ViewPager2 viewPager2;
     TabLayout tabLayout;
     SwipeRefreshLayout swipeRefreshLayout;
+    private String search;
+
+    public HomeFragment(String search) {
+        this.search = search;
+    }
+
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         model.setModel(this);
+        Log.d("test2",model.toString());
         View rootView = inflater.inflate(R.layout.fragment_home,container,false);
-        init(rootView);
+        viewPager2= rootView.findViewById(R.id.home_viewpager);
+        tabLayout = rootView.findViewById(R.id.home_tab);
+        if (search==null){
+            init(rootView);
+        }else{
+            rootView.findViewById(R.id.home_action).setVisibility(View.GONE);
+        }
+        model.getPostType();
         return rootView;
     }
 
     public void init(View rootView){
-        viewPager2= rootView.findViewById(R.id.home_viewpager);
-        tabLayout = rootView.findViewById(R.id.home_tab);
-        View view = rootView.findViewById(R.id.home_bar_newmessage);
-
-        CircleImageView circleImageView = rootView.findViewById(R.id.home_bar_circle);
         SharedPreferences sharedPreferences = MyApplication.getSharedPreferences();
+
+        View view = rootView.findViewById(R.id.home_bar_newmessage);
+        CircleImageView circleImageView = rootView.findViewById(R.id.home_bar_circle);
+        rootView.findViewById(R.id.home_bar_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), SearchActivity.class);
+                getContext().startActivity(intent);
+            }
+        });
         String image = sharedPreferences.getString("avatar","");
         if(image!=null&&image!=""){
             Glide.with(this).load(image).into(circleImageView);
         }
+        rootView.findViewById(R.id.home_bar_add).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), AddPostActivity.class);
+                startActivity(intent);
+            }
+        });
+
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,22 +132,13 @@ public class HomeFragment extends Fragment implements HomePresenter.View {
                 }
             }
         });
-        view.setOnClickListener(new View.OnClickListener() {
+        rootView.findViewById(R.id.home_bar_news).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                view.setVisibility(View.INVISIBLE);
+                MainActivity mainActivity = (MainActivity) getActivity();
+                mainActivity.showFragment(3);
             }
         });
-
-        rootView.findViewById(R.id.home_bar_add).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), AddPostActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        model.getPostType();
     }
 
 
@@ -133,7 +153,7 @@ public class HomeFragment extends Fragment implements HomePresenter.View {
         viewPager2.setAdapter(new ViewPagerAdapter(list, listItem, new CurrentCallBack() {
             @Override
             public void refresh(Integer pg, Integer pz, int typeId, RecyclerView.Adapter adapter) {
-                model.getListPost(pg,pz,typeId,adapter);
+                model.getListPost(search,pg,pz,typeId,adapter);
             }
         }));
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {

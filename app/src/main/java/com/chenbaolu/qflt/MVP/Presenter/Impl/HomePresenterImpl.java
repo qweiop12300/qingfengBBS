@@ -52,8 +52,8 @@ public class HomePresenterImpl implements HomePresenter.Model {
     }
 
     @Override
-    public void getListPost(Integer pg, Integer pz, int type_id, RecyclerView.Adapter adapter) {
-        PostAPI.getListPost(pg, pz, type_id,0,new LoadTasksCallBack<List<Post>>() {
+    public void getListPost(String search,Integer pg, Integer pz, int type_id, RecyclerView.Adapter adapter) {
+        PostAPI.getListPost(pg, pz, type_id,0,search,new LoadTasksCallBack<List<Post>>() {
             @Override
             public void onSuccess(List<Post> posts) {
                 boolean isAdd = pg==0?false:true;

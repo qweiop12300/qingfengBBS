@@ -52,7 +52,7 @@ public class UserDetailPresenterImpl implements UserDetailsPresenter.Model {
 
     @Override
     public void getPostList(Integer pg, Integer pz, int type_id, int uid) {
-        PostAPI.getListPost(pg, pz, type_id, uid, new LoadTasksCallBack<List<Post>>() {
+        PostAPI.getListPost(pg, pz, type_id, uid, null,new LoadTasksCallBack<List<Post>>() {
             @Override
             public void onSuccess(List<Post> posts) {
                 view.showPostList(posts);

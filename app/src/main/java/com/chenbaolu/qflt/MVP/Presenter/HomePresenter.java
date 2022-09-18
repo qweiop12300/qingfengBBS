@@ -20,6 +20,6 @@ public interface HomePresenter {
     }
     interface Model extends BasePresenter.BaseModel{
         void getPostType();
-        void getListPost(Integer pg, Integer pz, int type_id, RecyclerView.Adapter adapter);
+        void getListPost(String search,Integer pg, Integer pz, int type_id, RecyclerView.Adapter adapter);
     }
 }

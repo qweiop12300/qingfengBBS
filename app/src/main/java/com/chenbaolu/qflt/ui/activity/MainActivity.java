@@ -51,7 +51,7 @@ public class MainActivity extends BaseActivity {
     protected void init(){
         BottomNavigationView navView = findViewById(R.id.main_bottom);
 
-        HomeFragment homeFragment = new HomeFragment();
+        HomeFragment homeFragment = new HomeFragment(null);
         MineFragment mineFragment = new MineFragment();
         MessageFragment messageFragment = new MessageFragment();
         AttentionFragment attentionFragment = new AttentionFragment();
@@ -73,6 +73,7 @@ public class MainActivity extends BaseActivity {
         navView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
                 Long id = BaseApplication.getUserId();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
                         .hide(homeFragment)
@@ -81,6 +82,8 @@ public class MainActivity extends BaseActivity {
                         .hide(attentionFragment);
                 if (id==0){
                     fragmentTransaction.show(homeFragment).commit();
+                    Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                    startActivity(intent);
                     Toast.makeText(MainActivity.this, "请登录", Toast.LENGTH_SHORT).show();
                     return false;
                 }

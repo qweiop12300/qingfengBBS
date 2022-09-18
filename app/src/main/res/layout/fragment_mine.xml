@@ -28,7 +28,7 @@
                     android:id="@+id/mine_circler"
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?attr/actionBarSize"
-                    android:src="@mipmap/ic_launcher">
+                    android:src="@drawable/icon">
                 </de.hdodenhof.circleimageview.CircleImageView>
                 <TextView
                     android:id="@+id/mine_user_name"

@@ -11,17 +11,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.chenbaolu.baselib.BaseApplication;
 import com.chenbaolu.baselib.CallBack.LoadTasksCallBack;
+import com.chenbaolu.baselib.network.bean.pojo.ImageStatus;
 import com.chenbaolu.baselib.network.bean.pojo.Post;
+import com.chenbaolu.qflt.CallBack.ListCallBack;
 import com.chenbaolu.qflt.MVP.API.PostAPI;
 import com.chenbaolu.qflt.R;
 import com.chenbaolu.qflt.ui.activity.PostDetailsActivity;
 import com.chenbaolu.qflt.ui.activity.UserDetailActivity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -66,6 +74,23 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         holder.like.setImageDrawable(post.getPlu()!=null?context.getDrawable(R.drawable.ic_post_thumb2):context.getDrawable(R.drawable.ic_post_thumb));
         holder.collects.setImageDrawable(post.getPcu()!=null?context.getDrawable(R.drawable.ic_post_star2):context.getDrawable(R.drawable.ic_post_star));
         Glide.with(context).load(post.getUser_data().getAvatar()).into(holder.circleImageView);
+        holder.recyclerView.setLayoutManager(new GridLayoutManager(context,3));
+        try {
+            JSONArray jsonArray = new JSONArray(post.getImages());
+            List<ImageStatus> imageStatuses = new ArrayList<>();
+            for (int i=0;i<jsonArray.length();i++){
+                imageStatuses.add(new ImageStatus(null,jsonArray.getString(i)));
+            }
+            holder.recyclerView.setAdapter(new ImageRecyclerViewAdapter(imageStatuses, context, new ListCallBack() {
+                @Override
+                public void click(String url) {
+
+                }
+            }));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,6 +198,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         ImageView like;
         ImageView collects;
         ImageView comments;
+        RecyclerView recyclerView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             circleImageView = itemView.findViewById(R.id.card_post_home_circle);
@@ -185,6 +211,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             like_size = itemView.findViewById(R.id.like_size);
             collects_size = itemView.findViewById(R.id.collects_size);
             comments_size = itemView.findViewById(R.id.comments_size);
+            recyclerView = itemView.findViewById(R.id.card_post_home_rec);
         }
     }
 }

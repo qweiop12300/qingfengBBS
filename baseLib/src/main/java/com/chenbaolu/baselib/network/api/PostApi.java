@@ -28,7 +28,7 @@ public interface PostApi {
 
     @FormUrlEncoded
     @POST("getListPost")
-    Observable<BaseResult<List<Post>>> getListPost(@Field("pg") Integer pg, @Field("pz") Integer pz, @Field("type_id") int type_id,@Field("uid") int uid);
+    Observable<BaseResult<List<Post>>> getListPost(@Field("pg") Integer pg, @Field("pz") Integer pz, @Field("type_id") int type_id,@Field("uid") int uid,@Field("search") String s);
 
     @POST("setPostComments")
     Observable<BaseResult<String>> setPostComments(@Body PostCommentsDto postCommentsDto);

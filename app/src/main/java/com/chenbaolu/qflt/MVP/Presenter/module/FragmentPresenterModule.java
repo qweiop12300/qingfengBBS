@@ -23,7 +23,7 @@ import dagger.hilt.android.components.FragmentComponent;
  * 作者 : 23128
  */
 @Module
-@InstallIn(ActivityComponent.class)
+@InstallIn(FragmentComponent.class)
 public abstract class FragmentPresenterModule {
 
 

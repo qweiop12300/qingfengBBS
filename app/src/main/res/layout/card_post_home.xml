@@ -48,11 +48,17 @@
             android:lines="2"
             android:ellipsize="end">
         </TextView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@+id/card_post_home_content"
+            android:id="@+id/card_post_home_rec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </androidx.recyclerview.widget.RecyclerView>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="?attr/actionBarSize"
-            android:layout_below="@id/card_post_home_content">
+            android:layout_below="@id/card_post_home_rec">
 
             <ImageView
                 android:id="@+id/card_post_home_like"
@@ -76,7 +82,7 @@
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="?attr/actionBarSize"
-            android:layout_below="@id/card_post_home_content">
+            android:layout_below="@id/card_post_home_rec">
             <ImageView
                 android:id="@+id/card_post_home_comments"
                 android:layout_width="wrap_content"
@@ -100,7 +106,7 @@
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="?attr/actionBarSize"
-            android:layout_below="@id/card_post_home_content">
+            android:layout_below="@id/card_post_home_rec">
             <ImageView
                 android:id="@+id/card_post_home_collects"
                 android:layout_width="wrap_content"

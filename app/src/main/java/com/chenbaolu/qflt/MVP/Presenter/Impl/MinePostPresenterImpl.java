@@ -105,7 +105,7 @@ public class MinePostPresenterImpl implements MinePostPresenter.Model {
 
     @Override
     public void getPost(long id) {
-        PostAPI.getListPost(0, 100, 0, (int) id, new LoadTasksCallBack<List<Post>>() {
+        PostAPI.getListPost(0, 100, 0, (int) id, null,new LoadTasksCallBack<List<Post>>() {
             @Override
             public void onSuccess(List<Post> list) {
                 view.showPost(list);

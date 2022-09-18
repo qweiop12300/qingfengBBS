@@ -11,6 +11,7 @@ android:layout_height="match_parent">
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     >
     <RelativeLayout
+        android:id="@+id/home_action"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:layout_scrollFlags="scroll|enterAlways">
@@ -19,9 +20,10 @@ android:layout_height="match_parent">
             android:id="@+id/home_bar_circle"
             android:layout_width="?attr/actionBarSize"
             android:layout_height="?attr/actionBarSize"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/icon"
             android:layout_margin="10dp">
         </de.hdodenhof.circleimageview.CircleImageView>
+
 
         <TextView
             android:id="@+id/home_bar_search"
@@ -34,6 +36,14 @@ android:layout_height="match_parent">
             android:layout_toRightOf="@+id/home_bar_circle"
             android:layout_toLeftOf="@+id/home_bar_news"
             android:background="@drawable/search_radius"></TextView>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignLeft="@+id/home_bar_search"
+            android:layout_alignTop="@+id/home_bar_search"
+            android:src="@drawable/ic_action_search">
+        </ImageView>
 
         <ImageView
             android:id="@+id/home_bar_news"

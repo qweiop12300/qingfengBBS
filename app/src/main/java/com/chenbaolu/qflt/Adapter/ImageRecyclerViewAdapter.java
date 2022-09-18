@@ -46,6 +46,12 @@ public class ImageRecyclerViewAdapter extends RecyclerView.Adapter<ImageRecycler
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ImageStatus imageStatus = list.get(position);
+        if (imageStatus.getUri()==null){
+            Glide.with(context).load(imageStatus.getUrl()).into(holder.imageView);
+            holder.close.setVisibility(View.GONE);
+            holder.textView.setVisibility(View.GONE);
+            return;
+        }
         Glide.with(context).load(imageStatus.getUri()).into(holder.imageView);
         if (imageStatus.getUrl() == null) {
             holder.textView.setText("正在上传");
